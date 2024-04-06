@@ -7,14 +7,14 @@ public:
 
 	void Init();
 	void Shutdown();
-	void Tick(float DeltaTime);
+	void Tick(double DeltaTime);
 	void Render();
-	bool IsRunning() { return isRunning; }
+	bool IsRunning() { return m_IsRunning; }
 
 private:
 
-	bool isRunning = false;
+	bool m_IsRunning = false;
 	
-	SDL_Window* window;
-	SDL_Renderer* renderer;
+	SDL_Window* m_Window;
+	SDL_Renderer* m_Renderer;
 };
