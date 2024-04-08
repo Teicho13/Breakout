@@ -1,5 +1,6 @@
 #include <SDL.h>
 #undef main
+#include "SDL_image.h"
 
 #include <Core/Game.h>
 
@@ -22,6 +23,8 @@ bool IsRunning = true;
 bool FirstFrame = false;
 
 
+SDL_Texture* TestTexture = nullptr;
+
 void Initialize()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -34,6 +37,11 @@ void Initialize()
 
 	Renderer = SDL_CreateRenderer(Window, -1, 0);
 	SDL_SetRenderDrawColor(Renderer, 27, 146, 214, 255);
+
+	//Temporary: Create texture
+	SDL_Surface* Surface = IMG_Load("Assets/Images/TestAsset.png");
+	TestTexture = SDL_CreateTextureFromSurface(Renderer, Surface);
+	SDL_FreeSurface(Surface);
 }
 
 void PollEvents()
@@ -50,6 +58,9 @@ void PollEvents()
 void Render()
 {
 	SDL_RenderClear(Renderer);
+
+	SDL_RenderCopy(Renderer, TestTexture, NULL, NULL);
+
 	SDL_RenderPresent(Renderer);
 }
 

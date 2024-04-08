@@ -24,6 +24,8 @@
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="Dependencies\SDL2\lib\x64\SDL2.dll" />
+    <CopyFileToFolders Include="Dependencies\SDL2-image\lib\x64\SDL2_image.dll" />
+    <CopyFileToFolders Include="Dependencies\SDL2-image\lib\x64\libwebp-7.dll" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Core\Game.h">
