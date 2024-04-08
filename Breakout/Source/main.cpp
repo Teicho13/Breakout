@@ -1,8 +1,9 @@
 #include <SDL.h>
 #undef main
-#include "SDL_image.h"
+#include <SDL_image.h>
 
-#include <Core/Game.h>
+#include "Core/Game.h"
+#include "Core/TextureManager.h"
 
 const int WindowWidth = 1280;
 const int WindowHeight = 720;
@@ -11,6 +12,8 @@ const int WindowHeight = 720;
 SDL_Window* Window = nullptr;
 SDL_Renderer* Renderer = nullptr;
 Game* breakout = nullptr;
+
+TextureManager* TextManager = nullptr;
 
 //Timer
 Uint64 time = SDL_GetPerformanceCounter();
@@ -38,10 +41,9 @@ void Initialize()
 	Renderer = SDL_CreateRenderer(Window, -1, 0);
 	SDL_SetRenderDrawColor(Renderer, 27, 146, 214, 255);
 
-	//Temporary: Create texture
-	SDL_Surface* Surface = IMG_Load("Assets/Images/TestAsset.png");
-	TestTexture = SDL_CreateTextureFromSurface(Renderer, Surface);
-	SDL_FreeSurface(Surface);
+	TextManager = new TextureManager(Renderer);
+
+	TestTexture = TextManager->CreateTexture("Assets/Images/TestAsset.png");
 }
 
 void PollEvents()
@@ -59,7 +61,7 @@ void Render()
 {
 	SDL_RenderClear(Renderer);
 
-	SDL_RenderCopy(Renderer, TestTexture, NULL, NULL);
+	TextManager->RenderTextures();
 
 	SDL_RenderPresent(Renderer);
 }

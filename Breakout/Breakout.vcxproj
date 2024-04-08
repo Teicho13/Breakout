@@ -135,7 +135,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Headers\Core\TextureManager.h" />
     <ClCompile Include="Source\Core\Game.cpp" />
+    <ClCompile Include="Source\Core\TextureManager.cpp" />
     <ClCompile Include="Source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
