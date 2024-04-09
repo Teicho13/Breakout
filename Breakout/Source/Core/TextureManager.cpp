@@ -9,13 +9,6 @@ TextureManager::TextureManager(SDL_Renderer* render)
 TextureManager::~TextureManager()
 {
 	delete m_Renderer;
-
-	//Remove all pointers
-	for (auto& gt : m_GameTextures)
-	{
-		delete gt;
-	}
-	m_GameTextures.clear();
 }
 
 SDL_Texture* TextureManager::CreateTexture(const char* TexturePath)
@@ -26,17 +19,10 @@ SDL_Texture* TextureManager::CreateTexture(const char* TexturePath)
 	//Free Surface since we dont need it anymore
 	SDL_FreeSurface(Surface);
 
-	m_GameTextures.push_back(TempTexture);
 	return TempTexture;
 }
 
-void TextureManager::RenderTextures()
+void TextureManager::RenderTexture(SDL_Texture* Texture, const SDL_Rect* Position)
 {
-	if (!m_GameTextures.empty())
-	{
-		for (size_t i = 0; i < m_GameTextures.size(); i++)
-		{
-			SDL_RenderCopy(m_Renderer, m_GameTextures[i], NULL, NULL);
-		}
-	}
+	SDL_RenderCopy(m_Renderer, Texture, NULL, Position);
 }

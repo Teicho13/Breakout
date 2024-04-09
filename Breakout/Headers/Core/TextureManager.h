@@ -3,6 +3,7 @@
 
 struct SDL_Renderer;
 struct SDL_Texture;
+struct SDL_Rect;
 
 class TextureManager
 {
@@ -12,9 +13,8 @@ public:
 	
 	SDL_Texture* CreateTexture(const char* TexturePath);
 
-	void RenderTextures();
+	void RenderTexture(SDL_Texture* Texture, const SDL_Rect* Position);
 
 private:
 	SDL_Renderer* m_Renderer;
-	std::vector<SDL_Texture*> m_GameTextures;
 };

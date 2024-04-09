@@ -37,5 +37,8 @@
     <ClInclude Include="Headers\Core\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Headers\main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

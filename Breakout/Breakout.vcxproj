@@ -150,6 +150,7 @@
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Headers\main.h" />
     <ClInclude Include="Headers\Core\Game.h" />
   </ItemGroup>
   <ItemGroup>

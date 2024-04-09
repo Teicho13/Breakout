@@ -1,90 +1,86 @@
 #include <SDL.h>
-#undef main
 #include <SDL_image.h>
 
+#include "main.h"
 #include "Core/Game.h"
 #include "Core/TextureManager.h"
 
-const int WindowWidth = 1280;
-const int WindowHeight = 720;
-//#define FULLSCREEN
+SDL_Texture* TestTexture = nullptr;
 
-SDL_Window* Window = nullptr;
-SDL_Renderer* Renderer = nullptr;
-Game* breakout = nullptr;
+namespace Breakout
+{
+	void Initialize()
+	{
+		//Setup SDL and create window
+		SDL_Init(SDL_INIT_EVERYTHING);
 
-TextureManager* TextManager = nullptr;
+#ifdef FULLSCREEN
+		Window = SDL_CreateWindow("Breakout", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, g_WindowWidth, g_WindowHeight, SDL_WINDOW_FULLSCREEN);
+#else
+		g_Window = SDL_CreateWindow("Breakout", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, g_WindowWidth, g_WindowHeight, SDL_WINDOW_SHOWN);
+#endif
+
+		//Create renderer for SDL and set defaul background color
+		g_Renderer = SDL_CreateRenderer(g_Window, -1, 0);
+		SDL_SetRenderDrawColor(g_Renderer, 27, 146, 214, 255);
+
+		g_TextureManager = new TextureManager(g_Renderer);
+
+		TestTexture = g_TextureManager->CreateTexture("Assets/Images/TestAsset.png");
+
+		//Initialize game
+		g_breakout = new Game();
+
+		g_breakout->Init();
+	}
+
+	void PollEvents()
+	{
+		SDL_Event event;
+		SDL_PollEvent(&event);
+
+		if (event.type == SDL_QUIT)
+		{
+			g_IsRunning = false;
+		}
+	}
+
+	void Render()
+	{
+		//Clear render screen for new frame
+		SDL_RenderClear(g_Renderer);
+
+		//Temp create texture and render to screen
+		const SDL_Rect* location = new SDL_Rect { 0,0,600,400 };
+		g_TextureManager->RenderTexture(TestTexture, location);
+
+		//Render everything to the screen
+		SDL_RenderPresent(g_Renderer);
+	}
+
+	void ShutDown()
+	{
+		SDL_DestroyRenderer(g_Renderer);
+		SDL_DestroyWindow(g_Window);
+	}
+
+}
 
 //Timer
 Uint64 time = SDL_GetPerformanceCounter();
 Uint64 lastTime = 0;
 double deltaTime = 0;
 
-//Is the Application running ?
-bool IsRunning = true;
-//Is it the first fram the game is running ?
-bool FirstFrame = false;
-
-
-SDL_Texture* TestTexture = nullptr;
-
-void Initialize()
-{
-	SDL_Init(SDL_INIT_EVERYTHING);
-
-#ifdef FULLSCREEN
-	Window = SDL_CreateWindow("Breakout", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WindowWidth, WindowHeight, SDL_WINDOW_FULLSCREEN);
-#else
-	Window = SDL_CreateWindow("Breakout", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WindowWidth, WindowHeight, SDL_WINDOW_SHOWN);
-#endif
-
-	Renderer = SDL_CreateRenderer(Window, -1, 0);
-	SDL_SetRenderDrawColor(Renderer, 27, 146, 214, 255);
-
-	TextManager = new TextureManager(Renderer);
-
-	TestTexture = TextManager->CreateTexture("Assets/Images/TestAsset.png");
-}
-
-void PollEvents()
-{
-	SDL_Event event;
-	SDL_PollEvent(&event);
-
-	if (event.type == SDL_QUIT)
-	{
-		IsRunning = false;
-	}
-}
-
-void Render()
-{
-	SDL_RenderClear(Renderer);
-
-	TextManager->RenderTextures();
-
-	SDL_RenderPresent(Renderer);
-}
-
-void ShutDown()
-{
-	SDL_DestroyRenderer(Renderer);
-	SDL_DestroyWindow(Window);
-}
-
-
-int main()
+int main(int argc, char** argv)
 {
 	//Create and initialize the renderer and window
-	Initialize();
+	Breakout::Initialize();
 
-	breakout = new Game();
 
-	breakout->Init();
 
-	while (IsRunning)
+	while (Breakout::g_IsRunning)
 	{
-		PollEvents();
+		Breakout::PollEvents();
 
 		//Calculate Delta time in seconds
 		lastTime = time;
@@ -93,16 +89,17 @@ int main()
 		deltaTime = ((time - lastTime) / static_cast<double>(SDL_GetPerformanceFrequency()));
 
 		//Update Game
-		breakout->Tick(deltaTime);
+		Breakout::g_breakout->Tick(deltaTime);
 
-		Render();
+		Breakout::Render();
 	}
 
-	breakout->Shutdown();
-	delete breakout;
+	Breakout::g_breakout->Shutdown();
+	delete Breakout::g_breakout;
 
 	//Destroy created window and renderer
-	ShutDown();
+	Breakout::ShutDown();
 
 	return 0;
 }
+
