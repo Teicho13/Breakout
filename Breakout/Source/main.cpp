@@ -4,9 +4,6 @@
 #include "main.h"
 #include "Core/Game.h"
 #include "Core/TextureManager.h"
-#include "Entities/Entity.h"
-
-Entity* Player = nullptr;
 
 namespace Breakout
 {
@@ -24,11 +21,9 @@ namespace Breakout
 		//Create renderer for SDL and set defaul background color
 		g_Renderer = SDL_CreateRenderer(g_Window, -1, 0);
 		SDL_SetRenderDrawColor(g_Renderer, 27, 146, 214, 255);
-
-		Player = new Entity("Assets/Images/TestAsset.png", g_Renderer);
-
+ 
 		//Initialize game
-		g_breakout = new Game();
+		g_breakout = new Game(g_Renderer);
 
 		g_breakout->Init();
 	}
@@ -79,7 +74,7 @@ namespace Breakout
 		SDL_RenderClear(g_Renderer);
 
 		//Temp create texture and render to screen
-		Player->Draw(g_Renderer);
+		g_breakout->Render();
 
 		//Render everything to the screen
 		SDL_RenderPresent(g_Renderer);
@@ -102,8 +97,6 @@ int main(int argc, char** argv)
 {
 	//Create and initialize the renderer and window
 	Breakout::Initialize();
-
-
 
 	while (Breakout::g_IsRunning)
 	{

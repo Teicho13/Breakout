@@ -11,7 +11,7 @@ public:
 	void SetPosition(int posX, int posY);
 	void SetSize(int width, int height);
 
-	void Draw(SDL_Renderer* renderer);
+	void Draw();
 
 private:
 	

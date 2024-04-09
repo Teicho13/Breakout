@@ -34,7 +34,7 @@ void Entity::SetSize(int width, int height)
 	m_Position.h = height;
 }
 
-void Entity::Draw(SDL_Renderer* renderer)
+void Entity::Draw()
 {
-	TextureManager::RenderTexture(m_Sprite, renderer, &m_Position);
+	TextureManager::RenderTexture(m_Sprite, m_Renderer, &m_Position);
 }
