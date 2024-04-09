@@ -6,10 +6,12 @@ class Entity
 public:
 	
 	Entity(const char* filePath, SDL_Renderer* renderer);
-	Entity(const char* filePath, SDL_Renderer* renderer, int width, int height, int posX, int posY);
+	Entity(const char* filePath, SDL_Renderer* renderer, float width, float height, float posX, float posY);
 	
-	void SetPosition(int posX, int posY);
-	void SetSize(int width, int height);
+	void SetPosition(float posX, float posY);
+	void SetPosition(SDL_FRect pos);
+	SDL_FRect GetPosition();
+	void SetSize(float width, float height);
 
 	void Draw();
 
@@ -17,5 +19,5 @@ private:
 	
 	SDL_Texture* m_Sprite = nullptr;
 	SDL_Renderer* m_Renderer = nullptr;
-	SDL_Rect m_Position;
+	SDL_FRect m_Position;
 };

@@ -20,7 +20,9 @@ void Game::Shutdown()
 
 void Game::Tick(double DeltaTime)
 {
-
+	SDL_FRect tmpRec = Player->GetPosition();
+	tmpRec.x += 100.f * DeltaTime;
+	Player->SetPosition(tmpRec);
 }
 
 void Game::Render()
