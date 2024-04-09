@@ -1,6 +1,5 @@
 #pragma once
 
-
 //forward declaring
 
 struct SDL_Window;

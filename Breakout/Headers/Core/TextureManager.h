@@ -1,20 +1,12 @@
 #pragma once
-#include <vector>
-
-struct SDL_Renderer;
-struct SDL_Texture;
-struct SDL_Rect;
+#include <SDL_image.h>
 
 class TextureManager
 {
-public:
-	TextureManager(SDL_Renderer* render);
-	~TextureManager();
+
+public:	
 	
-	SDL_Texture* CreateTexture(const char* TexturePath);
+	static SDL_Texture* CreateTexture(const char* TexturePath, SDL_Renderer* renderer);
 
-	void RenderTexture(SDL_Texture* Texture, const SDL_Rect* Position);
-
-private:
-	SDL_Renderer* m_Renderer;
+	static void RenderTexture(SDL_Texture* Texture, SDL_Renderer* renderer, const SDL_Rect* Position);
 };

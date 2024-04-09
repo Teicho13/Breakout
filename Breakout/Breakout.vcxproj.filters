@@ -27,6 +27,9 @@
     <ClCompile Include="Headers\Core\TextureManager.h">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Entities\Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="Dependencies\SDL2\lib\x64\SDL2.dll" />
@@ -38,6 +41,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Entities\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
