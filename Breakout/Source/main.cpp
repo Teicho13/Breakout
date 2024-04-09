@@ -38,9 +38,38 @@ namespace Breakout
 		SDL_Event event;
 		SDL_PollEvent(&event);
 
-		if (event.type == SDL_QUIT)
+		switch (event.type)
 		{
+		//Window "X" is clicked
+		case SDL_QUIT:
 			g_IsRunning = false;
+			break;
+
+		//key is pressed
+		case SDL_KEYDOWN:
+			//If Escape is clicked exit out
+			if (event.key.keysym.sym == SDLK_ESCAPE)
+			{
+				g_IsRunning = false;
+				return;
+			}
+			g_breakout->KeyDown(event.key.keysym.scancode);
+			break;
+
+		//Key is let go
+		case SDL_KEYUP:
+			g_breakout->KeyUp(event.key.keysym.scancode);
+			break;
+
+		//Mouse clicked
+		case SDL_MOUSEBUTTONDOWN:
+			g_breakout->MouseButtondDown(event.button.button);
+			break;
+
+		//Mouse Let go
+		case SDL_MOUSEBUTTONUP:
+			g_breakout->MouseButtonUp(event.button.button);
+			break;
 		}
 	}
 
