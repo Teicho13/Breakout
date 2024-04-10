@@ -16,3 +16,15 @@ void TextureManager::RenderTexture(SDL_Texture* Texture, SDL_Renderer* renderer,
 {
 	SDL_RenderCopy(renderer, Texture, NULL, Position);
 }
+
+void TextureManager::RenderRect(SDL_Renderer* renderer, const SDL_Rect* rectangle)
+{
+	SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+	SDL_RenderDrawRect(renderer, rectangle);
+}
+
+void TextureManager::RenderSolidRect(SDL_Renderer* renderer, const SDL_Rect* rectangle)
+{
+	SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+	SDL_RenderFillRect(renderer, rectangle);
+}

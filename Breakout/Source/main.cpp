@@ -76,6 +76,7 @@ namespace Breakout
 	void Render()
 	{
 		//Clear render screen for new frame
+		SDL_SetRenderDrawColor(g_Renderer, 27, 146, 214, 255);
 		SDL_RenderClear(g_Renderer);
 
 		//Temp create texture and render to screen
