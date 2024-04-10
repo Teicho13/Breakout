@@ -39,9 +39,12 @@ void BrickManager::CreateBricks(int amount, int rowMax)
 
 void BrickManager::DrawBricks()
 {
-	for (auto& brick : m_Bricks)
+	if (m_Renderer != nullptr)
 	{
-		brick.Draw();
+		for (auto& brick : m_Bricks)
+		{
+			brick.Draw();
+		}
 	}
 }
 
