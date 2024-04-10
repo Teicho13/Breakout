@@ -1,5 +1,4 @@
 #include "Managers/BrickManager.h"
-#include "Entities/Brick.h"
 
 void BrickManager::SetRenderer(SDL_Renderer* renderer)
 {

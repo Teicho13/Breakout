@@ -2,8 +2,8 @@
 
 class SDL_Renderer;
 class Vaus;
-class Brick;
 class Entity;
+class EnergyBall;
 
 class Game 
 {
@@ -24,8 +24,8 @@ public:
 
 
 	Entity* m_Background = nullptr;
-	Vaus* Player = nullptr;
-	Brick* g_Brick = nullptr;
+	Vaus* m_Player = nullptr;
+	EnergyBall* m_EnergyBall;
 
 private:
 	SDL_Renderer* m_Renderer;

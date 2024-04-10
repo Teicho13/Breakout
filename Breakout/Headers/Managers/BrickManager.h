@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "Entities/Brick.h"
 
 struct SDL_Renderer;
 class Brick;

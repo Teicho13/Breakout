@@ -2,9 +2,8 @@
 
 #include "Core/Game.h"
 #include "Entities/Vaus.h"
-#include "Entities/Brick.h"
+#include "Entities/EngergyBall.h"
 #include "Managers/BrickManager.h"
-
 
 BrickManager brickManager;
 
@@ -17,7 +16,9 @@ void Game::Init()
 {
 	m_Background = new Entity("Assets/Images/Maps/BackgroundBlue.png", GetRenderer(), 1280.f, 720.f, 0.f, 0.f);
 	
-	Player = new Vaus("Assets/Images/Entities/Vaus.png", GetRenderer(),160.f,24.f,600.f,686.f);
+	m_Player = new Vaus("Assets/Images/Entities/Vaus.png", GetRenderer(),135.f,24.f,600.f,686.f);
+
+	m_EnergyBall = new EnergyBall("Assets/Images/Entities/EnergyBall.png", GetRenderer(), 25.f, 25.f, 655.f, 666.f);
 
 	brickManager.SetRenderer(GetRenderer());
 	brickManager.CreateBricks(54,18);
@@ -26,27 +27,30 @@ void Game::Init()
 void Game::Shutdown()
 {
 	delete m_Background;
-	delete Player;
+	delete m_Player;
+	delete m_EnergyBall;
 }
 
 void Game::Tick(double deltaTime, const Uint8* keyboard)
 {
 	if (keyboard[SDL_SCANCODE_D])
 	{
-		Player->Move(1,deltaTime);
+		m_Player->Move(1,deltaTime);
 	}
 
 	if (keyboard[SDL_SCANCODE_A])
 	{
-		Player->Move(-1, deltaTime);
+		m_Player->Move(-1, deltaTime);
 	}
 
+	m_EnergyBall->Move(deltaTime);
 }
 
 void Game::Render()
 {
 	m_Background->Draw();
-	Player->Draw();
+	m_Player->Draw();
+	m_EnergyBall->Draw();
 	brickManager.DrawBricks();
 }
 

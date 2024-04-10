@@ -136,6 +136,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Headers\Core\TextureManager.h" />
+    <ClCompile Include="Source\Entities\EngergyBall.cpp" />
+    <ClCompile Include="Headers\Entities\EngergyBall.h" />
     <ClCompile Include="Source\Core\Game.cpp" />
     <ClCompile Include="Source\Core\TextureManager.cpp" />
     <ClCompile Include="Source\Entities\Brick.cpp" />
@@ -154,6 +156,7 @@
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Headers\Core\Math.h" />
     <ClInclude Include="Headers\Entities\Brick.h" />
     <ClInclude Include="Headers\Entities\Entity.h" />
     <ClInclude Include="Headers\Entities\Vaus.h" />
