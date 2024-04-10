@@ -138,7 +138,9 @@
     <ClCompile Include="Headers\Core\TextureManager.h" />
     <ClCompile Include="Source\Core\Game.cpp" />
     <ClCompile Include="Source\Core\TextureManager.cpp" />
+    <ClCompile Include="Source\Entities\Brick.cpp" />
     <ClCompile Include="Source\Entities\Entity.cpp" />
+    <ClCompile Include="Source\Entities\Vaus.cpp" />
     <ClCompile Include="Source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,7 +153,9 @@
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Headers\Entities\Brick.h" />
     <ClInclude Include="Headers\Entities\Entity.h" />
+    <ClInclude Include="Headers\Entities\Vaus.h" />
     <ClInclude Include="Headers\main.h" />
     <ClInclude Include="Headers\Core\Game.h" />
   </ItemGroup>

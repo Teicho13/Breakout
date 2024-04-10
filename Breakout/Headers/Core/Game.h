@@ -1,6 +1,8 @@
 #pragma once
 
 class SDL_Renderer;
+class Vaus;
+class Brick;
 class Entity;
 class Game 
 {
@@ -19,7 +21,10 @@ public:
 	void MouseButtonUp(int keycode) {}
 	void MouseButtondDown(int keycode) {}
 
-	Entity* Player = nullptr;
+
+	Entity* m_Background = nullptr;
+	Vaus* Player = nullptr;
+	Brick* g_Brick = nullptr;
 
 private:
 	SDL_Renderer* m_Renderer;

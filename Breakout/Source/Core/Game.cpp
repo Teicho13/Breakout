@@ -1,7 +1,8 @@
 #include <SDL.h>
 
 #include "Core/Game.h"
-#include "Entities/Entity.h"
+#include "Entities/Vaus.h"
+#include "Entities/Brick.h"
 
 Game::Game(SDL_Renderer* renderer)
 {
@@ -10,12 +11,16 @@ Game::Game(SDL_Renderer* renderer)
 
 void Game::Init()
 {
-	Player = new Entity("Assets/Images/TestAsset.png", GetRenderer(),64.f,64.f,0,500.f);
+	m_Background = new Entity("Assets/Images/Maps/BackgroundBlue.png", GetRenderer(), 1280.f, 720.f, 0.f, 0.f);
+	Player = new Vaus("Assets/Images/Entities/Vaus.png", GetRenderer(),160.f,24.f,600.f,100.f);
+	g_Brick = new Brick("Assets/Images/Entities/BrickRed.png", GetRenderer(), 65.f, 32.f, 0, 500.f);
 }
 
 void Game::Shutdown()
 {
+	delete m_Background;
 	delete Player;
+	delete g_Brick;
 }
 
 void Game::Tick(double deltaTime, const Uint8* keyboard)
@@ -38,7 +43,9 @@ void Game::Tick(double deltaTime, const Uint8* keyboard)
 
 void Game::Render()
 {
+	m_Background->Draw();
 	Player->Draw();
+	g_Brick->Draw();
 }
 
 SDL_Renderer* Game::GetRenderer()
