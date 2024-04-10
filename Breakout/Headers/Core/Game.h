@@ -4,6 +4,7 @@ class SDL_Renderer;
 class Vaus;
 class Brick;
 class Entity;
+
 class Game 
 {
 public:

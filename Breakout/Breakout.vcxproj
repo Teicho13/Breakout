@@ -142,6 +142,7 @@
     <ClCompile Include="Source\Entities\Entity.cpp" />
     <ClCompile Include="Source\Entities\Vaus.cpp" />
     <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\Managers\BrickManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="Dependencies\SDL2\lib\x64\SDL2.dll">
@@ -158,6 +159,7 @@
     <ClInclude Include="Headers\Entities\Vaus.h" />
     <ClInclude Include="Headers\main.h" />
     <ClInclude Include="Headers\Core\Game.h" />
+    <ClInclude Include="Headers\Managers\BrickManager.h" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="Dependencies\SDL2-image\lib\x64\SDL2_image.dll">
