@@ -1,9 +1,11 @@
 #include <SDL.h>
+#include <iostream>
 
 #include "Core/Game.h"
 #include "Entities/Vaus.h"
 #include "Entities/EngergyBall.h"
 #include "Managers/BrickManager.h"
+#include "Core/Collision.h"
 
 BrickManager brickManager;
 
@@ -44,6 +46,10 @@ void Game::Tick(double deltaTime, const Uint8* keyboard)
 	}
 
 	m_EnergyBall->Move(deltaTime);
+
+	if (Breakout::Collision::AABB(m_Player->GetPosition(), m_EnergyBall->GetPosition())) {
+		std::cout << "Collision ! \n";
+	}
 }
 
 void Game::Render()

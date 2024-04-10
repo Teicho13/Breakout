@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Headers\Core\Collision.cpp" />
     <ClCompile Include="Headers\Core\TextureManager.h" />
     <ClCompile Include="Source\Entities\EngergyBall.cpp" />
     <ClCompile Include="Headers\Entities\EngergyBall.h" />
@@ -156,6 +157,7 @@
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Headers\Core\Collision.h" />
     <ClInclude Include="Headers\Core\Math.h" />
     <ClInclude Include="Headers\Entities\Brick.h" />
     <ClInclude Include="Headers\Entities\Entity.h" />

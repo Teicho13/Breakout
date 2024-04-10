@@ -33,7 +33,7 @@ void Entity::SetPosition(SDL_FRect pos)
 	m_Position = pos;
 }
 
-SDL_FRect Entity::GetPosition()
+const SDL_FRect Entity::GetPosition()
 {
 	return m_Position;
 }

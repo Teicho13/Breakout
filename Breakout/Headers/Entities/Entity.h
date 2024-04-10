@@ -10,7 +10,7 @@ public:
 	
 	void SetPosition(float posX, float posY);
 	void SetPosition(SDL_FRect pos);
-	SDL_FRect GetPosition();
+	const SDL_FRect GetPosition();
 	void SetSize(float width, float height);
 
 	void Draw();
