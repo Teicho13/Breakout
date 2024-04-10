@@ -10,7 +10,7 @@ Game::Game(SDL_Renderer* renderer)
 
 void Game::Init()
 {
-	Player = new Entity("Assets/Images/TestAsset.png", GetRenderer());
+	Player = new Entity("Assets/Images/TestAsset.png", GetRenderer(),64.f,64.f,0,500.f);
 }
 
 void Game::Shutdown()
@@ -18,11 +18,22 @@ void Game::Shutdown()
 	delete Player;
 }
 
-void Game::Tick(double DeltaTime)
+void Game::Tick(double deltaTime, const Uint8* keyboard)
 {
-	SDL_FRect tmpRec = Player->GetPosition();
-	tmpRec.x += 100.f * DeltaTime;
-	Player->SetPosition(tmpRec);
+	if (keyboard[SDL_SCANCODE_D])
+	{
+		SDL_FRect tmpRec = Player->GetPosition();
+		tmpRec.x += 300.f * deltaTime;
+		Player->SetPosition(tmpRec);
+	}
+
+	if (keyboard[SDL_SCANCODE_A])
+	{
+		SDL_FRect tmpRec = Player->GetPosition();
+		tmpRec.x -= 300.f * deltaTime;
+		Player->SetPosition(tmpRec);
+	}
+
 }
 
 void Game::Render()

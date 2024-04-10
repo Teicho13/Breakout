@@ -20,6 +20,13 @@ namespace Breakout {
 
 	TextureManager* g_TextureManager = nullptr;
 
+	//Timer
+	Uint64 g_Time = SDL_GetPerformanceCounter();
+	Uint64 g_LastTime = 0;
+	double g_DeltaTime = 0;
+
+	//Key States
+	const Uint8* g_KeyStates = nullptr;
 
 	//Is the Application running ?
 	bool g_IsRunning = true;

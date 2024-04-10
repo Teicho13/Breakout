@@ -9,7 +9,7 @@ public:
 
 	void Init();
 	void Shutdown();
-	void Tick(double DeltaTime);
+	void Tick(double deltaTime, const Uint8* keyboard);
 	void Render();
 
 	SDL_Renderer* GetRenderer();

@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
+#include <iostream>
 
 #include "main.h"
 #include "Core/Game.h"
@@ -21,6 +22,9 @@ namespace Breakout
 		//Create renderer for SDL and set defaul background color
 		g_Renderer = SDL_CreateRenderer(g_Window, -1, 0);
 		SDL_SetRenderDrawColor(g_Renderer, 27, 146, 214, 255);
+
+		//Pointer to keyboard button states
+		g_KeyStates = SDL_GetKeyboardState(nullptr);
  
 		//Initialize game
 		g_breakout = new Game(g_Renderer);
@@ -31,40 +35,41 @@ namespace Breakout
 	void PollEvents()
 	{
 		SDL_Event event;
-		SDL_PollEvent(&event);
-
-		switch (event.type)
+		while (SDL_PollEvent(&event)) 
 		{
-		//Window "X" is clicked
-		case SDL_QUIT:
-			g_IsRunning = false;
-			break;
-
-		//key is pressed
-		case SDL_KEYDOWN:
-			//If Escape is clicked exit out
-			if (event.key.keysym.sym == SDLK_ESCAPE)
+			switch (event.type)
 			{
+				//Window "X" is clicked
+			case SDL_QUIT:
 				g_IsRunning = false;
-				return;
+				break;
+
+				//key is pressed
+			case SDL_KEYDOWN:
+				//If Escape is clicked exit out
+				if (event.key.keysym.sym == SDLK_ESCAPE)
+				{
+					g_IsRunning = false;
+					return;
+				}
+				g_breakout->KeyDown(event.key.keysym.scancode);
+				break;
+
+				//Key is let go
+			case SDL_KEYUP:
+				g_breakout->KeyUp(event.key.keysym.scancode);
+				break;
+
+				//Mouse clicked
+			case SDL_MOUSEBUTTONDOWN:
+				g_breakout->MouseButtondDown(event.button.button);
+				break;
+
+				//Mouse Let go
+			case SDL_MOUSEBUTTONUP:
+				g_breakout->MouseButtonUp(event.button.button);
+				break;
 			}
-			g_breakout->KeyDown(event.key.keysym.scancode);
-			break;
-
-		//Key is let go
-		case SDL_KEYUP:
-			g_breakout->KeyUp(event.key.keysym.scancode);
-			break;
-
-		//Mouse clicked
-		case SDL_MOUSEBUTTONDOWN:
-			g_breakout->MouseButtondDown(event.button.button);
-			break;
-
-		//Mouse Let go
-		case SDL_MOUSEBUTTONUP:
-			g_breakout->MouseButtonUp(event.button.button);
-			break;
 		}
 	}
 
@@ -88,10 +93,6 @@ namespace Breakout
 
 }
 
-//Timer
-Uint64 time = SDL_GetPerformanceCounter();
-Uint64 lastTime = 0;
-double deltaTime = 0;
 
 int main(int argc, char** argv)
 {
@@ -103,13 +104,13 @@ int main(int argc, char** argv)
 		Breakout::PollEvents();
 
 		//Calculate Delta time in seconds
-		lastTime = time;
-		time = SDL_GetPerformanceCounter();
+		Breakout::g_LastTime = Breakout::g_Time;
+		Breakout::g_Time = SDL_GetPerformanceCounter();
 
-		deltaTime = ((time - lastTime) / static_cast<double>(SDL_GetPerformanceFrequency()));
+		Breakout::g_DeltaTime = ((Breakout::g_Time - Breakout::g_LastTime) / static_cast<double>(SDL_GetPerformanceFrequency()));
 
 		//Update Game
-		Breakout::g_breakout->Tick(deltaTime);
+		Breakout::g_breakout->Tick(Breakout::g_DeltaTime,Breakout::g_KeyStates);
 
 		Breakout::Render();
 	}
