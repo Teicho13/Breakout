@@ -1,6 +1,6 @@
 #pragma once
 
-class SDL_FRect;
+struct SDL_FRect;
 
 namespace Breakout
 {

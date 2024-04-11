@@ -47,12 +47,7 @@ void Game::Tick(double deltaTime, const Uint8* keyboard)
 
 	m_EnergyBall->Move(deltaTime);
 
-	brickManager.CheckCollision(m_EnergyBall);
-
-	//Check for circle collision with player.
-	if (Breakout::Collision::CircleRect(m_EnergyBall->GetTransform(), m_Player->GetTransform())) {
-		m_EnergyBall->BouncePlayer(m_Player);
-	}
+	CheckCollisions();	
 }
 
 void Game::Render()
@@ -61,6 +56,17 @@ void Game::Render()
 	m_Player->Draw();
 	m_EnergyBall->Draw();
 	brickManager.DrawBricks();
+}
+
+void Game::CheckCollisions()
+{
+
+	brickManager.CheckCollision(m_EnergyBall);
+
+	//Check for circle collision with player.
+	if (Breakout::Collision::CircleRect(m_EnergyBall->GetTransform(), m_Player->GetTransform())) {
+		m_EnergyBall->BouncePlayer(m_Player);
+	}
 }
 
 SDL_Renderer* Game::GetRenderer()

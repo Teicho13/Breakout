@@ -135,7 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Headers\Core\Collision.cpp" />
+    <ClCompile Include="Source\Core\Collision.cpp" />
     <ClCompile Include="Headers\Core\TextureManager.h" />
     <ClCompile Include="Source\Entities\EngergyBall.cpp" />
     <ClCompile Include="Headers\Entities\EngergyBall.h" />

@@ -4,6 +4,7 @@
 
 struct SDL_FRect;
 class Vaus;
+class Brick;
 class EnergyBall : public Entity
 {
 public:
@@ -14,6 +15,8 @@ public:
 
 	float Reflect(float hitX, float playerW);
 	void BouncePlayer(Vaus* player);
+	void BounceBrick(int side);
+	void BrickWallHit(Brick& brick);
 
 	void CheckBounds(SDL_FRect& tmpRec);
 	Breakout::vec2 GetCenter();

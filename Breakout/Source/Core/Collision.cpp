@@ -1,6 +1,8 @@
 #include <SDL.h>
 #include "./Core/Collision.h"
+#include "Core/Math.h"
 
+#include <algorithm>
 
 bool Breakout::Collision::AABB(const SDL_FRect A, const SDL_FRect B)
 {

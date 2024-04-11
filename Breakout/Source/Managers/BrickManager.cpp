@@ -36,6 +36,7 @@ void BrickManager::CreateBricks(int amount, int rowMax)
 
 		filePath = GetBrickTexture(filePath, row);
 
+
 		m_Bricks.emplace_back(Brick(filePath, m_Renderer, 65.f, 32.f, offsetX + (placementX * column), offsetY + (placementY * row)));
 
 		column++;
@@ -64,7 +65,7 @@ void BrickManager::CheckCollision(EnergyBall* energyBall)
 			std::remove_if(
 				m_Bricks.begin(),
 				m_Bricks.end(),
-				[&energyBall](auto& p) { return Breakout::Collision::CircleRect(energyBall->GetTransform(), p.GetTransform()); }),
+				[&energyBall](auto& p) { if (Breakout::Collision::CircleRect(energyBall->GetTransform(), p.GetTransform())) { energyBall->BrickWallHit(p); return true; } return false; }),
 				m_Bricks.end()
 		);
 	}

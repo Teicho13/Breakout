@@ -3,7 +3,7 @@
 #include "Entities/Brick.h"
 
 struct SDL_Renderer;
-struct EnergyBall;
+class EnergyBall;
 class Brick;
 
 class BrickManager

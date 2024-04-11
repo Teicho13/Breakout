@@ -1,6 +1,6 @@
 #pragma once
 
-class SDL_Renderer;
+struct SDL_Renderer;
 class Vaus;
 class Entity;
 class EnergyBall;
@@ -14,6 +14,8 @@ public:
 	void Shutdown();
 	void Tick(double deltaTime, const Uint8* keyboard);
 	void Render();
+
+	void CheckCollisions();
 
 	SDL_Renderer* GetRenderer();
 
