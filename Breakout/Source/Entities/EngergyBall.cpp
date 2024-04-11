@@ -1,11 +1,10 @@
 #include "./Entities/EngergyBall.h"
+#include "./Entities/Vaus.h"
 
 EnergyBall::EnergyBall(const char* filePath, SDL_Renderer* renderer, float width, float height, float posX, float posY)
 	: Entity(filePath, renderer, width, height, posX, posY)
 {
-	m_Direction = { 400.f, -400.f };
-	//m_Direction = { 0.f, 0.f };
-
+	m_Direction = { m_Speed, -m_Speed };
 }
 
 void EnergyBall::Move(float dt)
@@ -15,6 +14,32 @@ void EnergyBall::Move(float dt)
 	tmpRec.y += m_Direction.y * dt;
 	CheckBounds(tmpRec);
 	SetPosition(tmpRec);
+}
+
+void EnergyBall::BouncePlayer(Vaus* player)
+{
+	Breakout::vec2 center = GetCenter();
+	float ballX = center.x;
+	float ballY = center.y;
+	
+	//Check where we hit.
+	//TODO: Get Hit normal and reflect using the correct angle
+
+	if (ballX >= player->GetTransform().x + (player->GetTransform().w / 2))
+	{
+		m_Direction.x *= 1;
+	}
+	else
+	{
+		m_Direction.x *= -1;
+
+	}
+
+	SDL_FRect tmpRec = GetTransform();
+	tmpRec.y = (player->GetTransform().y - tmpRec.h) - 1;
+	SetPosition(tmpRec);
+
+	m_Direction.y *= -1;
 }
 
 void EnergyBall::CheckBounds(SDL_FRect& tmpRec)

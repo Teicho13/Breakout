@@ -3,12 +3,15 @@
 #include "Core/Math.h"
 
 struct SDL_FRect;
+class Vaus;
 class EnergyBall : public Entity
 {
 public:
 	EnergyBall(const char* filePath, SDL_Renderer* renderer, float width, float height, float posX, float posY);
 
 	void Move(float dt);
+	void BouncePlayer(Vaus* player);
+
 	void CheckBounds(SDL_FRect& tmpRec);
 	Breakout::vec2 GetCenter();
 
@@ -16,4 +19,5 @@ public:
 
 private: 
 	
+	float m_Speed = 400.f;
 };

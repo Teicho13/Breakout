@@ -51,7 +51,7 @@ void Game::Tick(double deltaTime, const Uint8* keyboard)
 
 	//Check for circle collision with player.
 	if (Breakout::Collision::CircleRect(m_EnergyBall->GetTransform(), m_Player->GetTransform())) {
-		//std::cout << "Collision ! \n";
+		m_EnergyBall->BouncePlayer(m_Player);
 	}
 }
 
