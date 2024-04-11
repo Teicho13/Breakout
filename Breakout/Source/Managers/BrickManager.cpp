@@ -1,14 +1,27 @@
+#include <iostream>
+#include <algorithm>
+#include <random>
+
 #include "Managers/BrickManager.h"
 #include "Core/Collision.h"
 #include "Entities/EngergyBall.h"
 
-#include <iostream>
-#include <algorithm>
 
+typedef std::mt19937 rng_type;
+std::uniform_int_distribution<rng_type::result_type> udist(0, 9);
 
 void BrickManager::SetRenderer(SDL_Renderer* renderer)
 {
 	m_Renderer = renderer;
+}
+
+int BrickManager::GetRandomNumber(int min, int max)
+{
+	std::random_device rd; // obtain a random number from hardware
+	std::mt19937 gen(rd()); // seed the generator
+	std::uniform_int_distribution<> distr(min, max);
+
+	return distr(gen);
 }
 
 void BrickManager::CreateBricks(int amount, int rowMax)
@@ -34,10 +47,19 @@ void BrickManager::CreateBricks(int amount, int rowMax)
 			column = 0;
 		}
 
-		filePath = GetBrickTexture(filePath, row);
+		
 
+		int randVal = GetRandomNumber(0, 9);
+		bool isSolid = false;
 
-		m_Bricks.emplace_back(Brick(filePath, m_Renderer, 65.f, 32.f, offsetX + (placementX * column), offsetY + (placementY * row)));
+		if (randVal == 3)
+		{
+			isSolid = true;
+		}
+
+		filePath = GetBrickTexture(filePath, row, isSolid);
+		
+		m_Bricks.emplace_back(Brick(filePath, m_Renderer, 65.f, 32.f, offsetX + (placementX * column), offsetY + (placementY * row),isSolid));
 
 		column++;
 	}
@@ -57,22 +79,30 @@ void BrickManager::DrawBricks()
 
 void BrickManager::CheckCollision(EnergyBall* energyBall)
 {
-	for (auto& brick : m_Bricks)
+	for (size_t i = 0; i < m_Bricks.size(); i++)
 	{
-		//Remove object if Lamda returns true (Object collides with energyball)
-
-		m_Bricks.erase(
-			std::remove_if(
-				m_Bricks.begin(),
-				m_Bricks.end(),
-				[&energyBall](auto& p) { if (Breakout::Collision::CircleRect(energyBall->GetTransform(), p.GetTransform())) { energyBall->BrickWallHit(p); return true; } return false; }),
-				m_Bricks.end()
-		);
+		if (Breakout::Collision::CircleRect(energyBall->GetTransform(), m_Bricks[i].GetTransform()))
+		{
+			if (!m_Bricks[i].GetIsSolid())
+			{
+				m_Bricks.erase(m_Bricks.begin() + i);
+				energyBall->m_Direction.x *= -1.f;
+				energyBall->m_Direction.y *= -1.f;
+				break;
+			}
+			energyBall->m_Direction.x *= -1.f;
+			energyBall->m_Direction.y *= -1.f;
+		}
 	}
 }
 
-const char* BrickManager::GetBrickTexture(const char*& filePath, int row)
+const char* BrickManager::GetBrickTexture(const char*& filePath, int row, bool solid)
 {
+	if (solid)
+	{
+		return filePath = "Assets/Images/Entities/BrickGrey.png";
+	}
+
 	switch (row)
 	{
 	case 0:

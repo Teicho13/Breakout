@@ -11,13 +11,14 @@ class BrickManager
 public:
 
 	void SetRenderer(SDL_Renderer* renderer);
+	int GetRandomNumber(int min, int max);
 
 	void CreateBricks(int amount, int rowMax);
 	void DrawBricks();
 
 	void CheckCollision(EnergyBall* energyBall);
 
-	const char* GetBrickTexture(const char* &filePath, int row);
+	const char* GetBrickTexture(const char* &filePath, int row, bool solid);
 
 private:
 	SDL_Renderer* m_Renderer = nullptr;

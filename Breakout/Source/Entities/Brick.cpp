@@ -8,7 +8,7 @@ Brick::Brick(const char* filePath, SDL_Renderer* renderer, float width, float he
 Brick::Brick(const char* filePath, SDL_Renderer* renderer, float width, float height, float posX, float posY, bool isSolid)
 	: Entity(filePath, renderer, width, height, posX, posY)
 {
-	m_IsSolid = true;
+	m_IsSolid = isSolid;
 }
 
 bool Brick::GetIsSolid()
