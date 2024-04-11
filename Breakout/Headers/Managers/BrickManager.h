@@ -3,6 +3,7 @@
 #include "Entities/Brick.h"
 
 struct SDL_Renderer;
+struct EnergyBall;
 class Brick;
 
 class BrickManager
@@ -13,6 +14,8 @@ public:
 
 	void CreateBricks(int amount, int rowMax);
 	void DrawBricks();
+
+	void CheckCollision(EnergyBall* energyBall);
 
 	const char* GetBrickTexture(const char* &filePath, int row);
 

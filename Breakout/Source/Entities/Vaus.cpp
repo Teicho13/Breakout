@@ -7,7 +7,7 @@ Vaus::Vaus(const char* filePath, SDL_Renderer* renderer, float width, float heig
 
 void Vaus::Move(int direction, float dt)
 {
-	SDL_FRect tmpRec = GetPosition();
+	SDL_FRect tmpRec = GetTransform();
 
 	//TODO: make this not a magic number / get window width
 	if (tmpRec.x + tmpRec.w >= 1280.f && direction == 1)

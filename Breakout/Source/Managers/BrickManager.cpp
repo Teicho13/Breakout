@@ -1,4 +1,10 @@
 #include "Managers/BrickManager.h"
+#include "Core/Collision.h"
+#include "Entities/EngergyBall.h"
+
+#include <iostream>
+#include <algorithm>
+
 
 void BrickManager::SetRenderer(SDL_Renderer* renderer)
 {
@@ -44,6 +50,23 @@ void BrickManager::DrawBricks()
 		{
 			brick.Draw();
 		}
+	}
+}
+
+
+void BrickManager::CheckCollision(EnergyBall* energyBall)
+{
+	for (auto& brick : m_Bricks)
+	{
+		//Remove object if Lamda returns true (Object collides with energyball)
+
+		m_Bricks.erase(
+			std::remove_if(
+				m_Bricks.begin(),
+				m_Bricks.end(),
+				[&energyBall](auto& p) { return Breakout::Collision::CircleRect(energyBall->GetTransform(), p.GetTransform()); }),
+				m_Bricks.end()
+		);
 	}
 }
 

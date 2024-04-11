@@ -10,7 +10,7 @@ EnergyBall::EnergyBall(const char* filePath, SDL_Renderer* renderer, float width
 
 void EnergyBall::Move(float dt)
 {
-	SDL_FRect tmpRec = GetPosition();
+	SDL_FRect tmpRec = GetTransform();
 	tmpRec.x += m_Direction.x * dt;
 	tmpRec.y += m_Direction.y * dt;
 	CheckBounds(tmpRec);
@@ -48,6 +48,6 @@ void EnergyBall::CheckBounds(SDL_FRect& tmpRec)
 
 Breakout::vec2 EnergyBall::GetCenter()
 {
-	SDL_FRect tmpRec = GetPosition();
+	SDL_FRect tmpRec = GetTransform();
 	return Breakout::vec2(tmpRec.x + (tmpRec.w / 2), tmpRec.y + (tmpRec.h / 2));
 }
