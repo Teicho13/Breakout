@@ -44,6 +44,13 @@ void Entity::SetSize(float width, float height)
 	m_Position.h = height;
 }
 
+void Entity::GetCenter(float& posX, float& posY)
+{
+	SDL_FRect tmpRect = GetPosition();
+	posX = tmpRect.x + (tmpRect.w / 2);
+	posY = tmpRect.y + (tmpRect.y / 2);
+}
+
 void Entity::Draw()
 {
 	SDL_Rect tmpRect;

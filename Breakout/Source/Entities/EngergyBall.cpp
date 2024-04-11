@@ -45,3 +45,9 @@ void EnergyBall::CheckBounds(SDL_FRect& tmpRec)
 	}
 		
 }
+
+Breakout::vec2 EnergyBall::GetCenter()
+{
+	SDL_FRect tmpRec = GetPosition();
+	return Breakout::vec2(tmpRec.x + (tmpRec.w / 2), tmpRec.y + (tmpRec.h / 2));
+}

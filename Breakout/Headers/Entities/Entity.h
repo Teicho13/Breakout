@@ -13,6 +13,8 @@ public:
 	const SDL_FRect GetPosition();
 	void SetSize(float width, float height);
 
+	void GetCenter(float &posX, float &posY);
+
 	void Draw();
 
 private:

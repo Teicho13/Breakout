@@ -10,6 +10,7 @@ public:
 
 	void Move(float dt);
 	void CheckBounds(SDL_FRect& tmpRec);
+	Breakout::vec2 GetCenter();
 
 	Breakout::vec2 m_Direction;
 

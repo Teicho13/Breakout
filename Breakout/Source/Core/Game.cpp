@@ -47,7 +47,8 @@ void Game::Tick(double deltaTime, const Uint8* keyboard)
 
 	m_EnergyBall->Move(deltaTime);
 
-	if (Breakout::Collision::AABB(m_Player->GetPosition(), m_EnergyBall->GetPosition())) {
+	//Check for circle collision with player.
+	if (Breakout::Collision::CircleRect(m_EnergyBall->GetPosition(), m_Player->GetPosition())) {
 		std::cout << "Collision ! \n";
 	}
 }
