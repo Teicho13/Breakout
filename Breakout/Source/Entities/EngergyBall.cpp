@@ -16,30 +16,50 @@ void EnergyBall::Move(float dt)
 	SetPosition(tmpRec);
 }
 
+void EnergyBall::SetDirection(float dirX, float dirY)
+{
+	//Normalize direction
+	float length = sqrtf(dirX * dirX + dirY * dirY);
+	m_Direction.x = m_Speed * (dirX / length);
+	m_Direction.y = m_Speed * (dirY / length);
+}
+
+float EnergyBall::Reflect(float hitX, float playerW)
+{
+	//Clamp hitX to start and width of player
+	if (hitX < 0) 
+	{
+		hitX = 0;
+	}
+	else if (hitX > playerW)
+	{
+		hitX = playerW;
+	}
+
+	//Scale reflection between -2 and 2
+	hitX -= playerW / 2.0f;
+	return 2.0f * (hitX / (playerW / 2.0f));
+}
+
+
+
 void EnergyBall::BouncePlayer(Vaus* player)
 {
+	//Get center of the ball
 	Breakout::vec2 center = GetCenter();
 	float ballX = center.x;
-	float ballY = center.y;
+
+	//Check which where you hit player and what direction to reflect to
 	
-	//Check where we hit.
-	//TODO: Get Hit normal and reflect using the correct angle
+	float hitX = Reflect(ballX - player->GetTransform().x, player->GetTransform().w);
+	
+	//Set Direction to reflection and up
+	SetDirection(hitX, -1);
 
-	if (ballX >= player->GetTransform().x + (player->GetTransform().w / 2))
-	{
-		m_Direction.x *= 1;
-	}
-	else
-	{
-		m_Direction.x *= -1;
-
-	}
-
+	//Set ball position above player
 	SDL_FRect tmpRec = GetTransform();
 	tmpRec.y = (player->GetTransform().y - tmpRec.h) - 1;
 	SetPosition(tmpRec);
-
-	m_Direction.y *= -1;
 }
 
 void EnergyBall::CheckBounds(SDL_FRect& tmpRec)
@@ -74,5 +94,5 @@ void EnergyBall::CheckBounds(SDL_FRect& tmpRec)
 Breakout::vec2 EnergyBall::GetCenter()
 {
 	SDL_FRect tmpRec = GetTransform();
-	return Breakout::vec2(tmpRec.x + (tmpRec.w / 2), tmpRec.y + (tmpRec.h / 2));
+	return Breakout::vec2(tmpRec.x + (tmpRec.w / 2.f), tmpRec.y + (tmpRec.h / 2.f));
 }

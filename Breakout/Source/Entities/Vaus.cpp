@@ -29,3 +29,11 @@ float Vaus::GetSpeed()
 {
 	return m_Speed;
 }
+
+Breakout::vec2 Vaus::GetNormal()
+{
+	SDL_FRect tempR = GetTransform();
+	float dx = (tempR.x + tempR.w) - tempR.x;
+	float dy = (tempR.y + tempR.h) - tempR.y;
+	return Breakout::vec2(dy, -dx);
+}

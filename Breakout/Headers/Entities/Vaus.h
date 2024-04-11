@@ -1,5 +1,7 @@
 #pragma once
 #include "Entity.h"
+#include "Core/Math.h"
+
 
 class Vaus : public Entity
 {
@@ -10,6 +12,8 @@ public:
 
 	void SetSpeed(float speed);
 	float GetSpeed();
+
+	Breakout::vec2 GetNormal();
 
 private:
 	float m_Speed = 600.f;
