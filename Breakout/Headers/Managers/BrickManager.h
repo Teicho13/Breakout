@@ -18,6 +18,8 @@ public:
 
 	void CheckCollision(EnergyBall* energyBall);
 
+	void ClearBricks();
+
 	const char* GetBrickTexture(const char* &filePath, int row, bool solid);
 
 private:

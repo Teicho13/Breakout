@@ -96,6 +96,12 @@ void BrickManager::CheckCollision(EnergyBall* energyBall)
 	}
 }
 
+void BrickManager::ClearBricks()
+{
+	m_Bricks.clear();
+	m_Renderer = nullptr;
+}
+
 const char* BrickManager::GetBrickTexture(const char*& filePath, int row, bool solid)
 {
 	if (solid)

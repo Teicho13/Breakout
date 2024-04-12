@@ -8,7 +8,6 @@ SDL_Texture* TextureManager::CreateTexture(const char* TexturePath, SDL_Renderer
 	SDL_Texture* TempTexture = SDL_CreateTextureFromSurface(renderer, Surface);
 	//Free Surface since we dont need it anymore
 	SDL_FreeSurface(Surface);
-
 	return TempTexture;
 }
 
