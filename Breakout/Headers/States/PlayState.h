@@ -20,6 +20,9 @@ public:
 
 	//Game Functions
 	void CheckCollisions();
+	//Reset position of ball and player
+	void ResetGame();
+
 
 	//Terrain
 	Entity* m_Background = nullptr;
@@ -36,5 +39,5 @@ protected:
 
 private:
 	static PlayState m_PlayState;
-
+	bool m_GameStarted = false;
 };

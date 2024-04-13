@@ -211,14 +211,6 @@ void EnergyBall::CheckBounds(SDL_FRect& tmpRec)
 		tmpRec.y = 0.f + 16.f;
 		m_Direction.y *= -1;
 	}
-
-	//Temporary for debugging
-	if (tmpRec.y + tmpRec.h >= 720.f)
-	{
-		tmpRec.y = 720.f - tmpRec.h;
-		m_Direction.y *= -1;
-	}
-		
 }
 
 Breakout::vec2 EnergyBall::GetCenter()

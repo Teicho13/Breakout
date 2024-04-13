@@ -21,9 +21,9 @@ void PlayState::Init(StateManager* manager)
 	m_LeftLine = new Entity("Assets/Images/Maps/SideLine.png", manager->GetRenderer(), 17.f, 720.f, 0.f, 0.f);
 	m_RightLine = new Entity("Assets/Images/Maps/SideLine.png", manager->GetRenderer(), 17.f, 720.f, static_cast<float>(manager->m_WindowWidth) - 17.f, 0.f);
 
-	m_Player = new Vaus("Assets/Images/Entities/Vaus.png", manager->GetRenderer(), 135.f, 24.f, 600.f, 686.f);
+	m_Player = new Vaus("Assets/Images/Entities/Vaus.png", manager->GetRenderer(), 135.f, 24.f, 600.f, 636.f);
 
-	m_EnergyBall = new EnergyBall("Assets/Images/Entities/EnergyBall.png", manager->GetRenderer(), 25.f, 25.f, 655.f, 666.f);
+	m_EnergyBall = new EnergyBall("Assets/Images/Entities/EnergyBall.png", manager->GetRenderer(), 25.f, 25.f, 655.f, 611.f);
 
 	brickManager.SetRenderer(manager->GetRenderer());
 	brickManager.CreateBricks(54, 18);
@@ -32,19 +32,28 @@ void PlayState::Init(StateManager* manager)
 
 void PlayState::Tick(StateManager* manager,float deltaTime)
 {
-	if (manager->GetKeyboardState()[SDL_SCANCODE_D])
+	if(m_GameStarted)
 	{
-		m_Player->Move(1,deltaTime);
+		if (manager->GetKeyboardState()[SDL_SCANCODE_D])
+		{
+			m_Player->Move(1, deltaTime);
+		}
+
+		if (manager->GetKeyboardState()[SDL_SCANCODE_A])
+		{
+			m_Player->Move(-1, deltaTime);
+		}
+
+		m_EnergyBall->Move(deltaTime);
+
+		if (m_EnergyBall->GetTransform().y + m_EnergyBall->GetTransform().h >= 720.f)
+		{
+			m_GameStarted = false;
+			ResetGame();
+		}
+
+		CheckCollisions();
 	}
-
-	if (manager->GetKeyboardState()[SDL_SCANCODE_A])
-	{
-		m_Player->Move(-1, deltaTime);
-	}
-
-	m_EnergyBall->Move(deltaTime);
-
-	CheckCollisions();
 }
 
 void PlayState::Shutdown()
@@ -98,6 +107,13 @@ void PlayState::HandleEvents(StateManager* manager)
 				return;
 			}
 			break;
+
+		case SDL_MOUSEBUTTONDOWN:
+			if (event.button.button == SDL_BUTTON_LEFT)
+			{
+				m_GameStarted = true;
+			}
+			break;
 		}
 	}
 }
@@ -111,4 +127,10 @@ void PlayState::CheckCollisions()
 	{
 		m_EnergyBall->BouncePlayer(m_Player);
 	}
+}
+
+void PlayState::ResetGame()
+{
+	m_Player->SetPosition(600.f, 636.f);
+	m_EnergyBall->SetPosition(655.f, 611.f);
 }
