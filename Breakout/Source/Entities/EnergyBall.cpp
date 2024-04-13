@@ -1,4 +1,4 @@
-#include "./Entities/EngergyBall.h"
+#include "./Entities/EnergyBall.h"
 #include "./Entities/Vaus.h"
 #include "./Entities/Brick.h"
 #include <iostream>

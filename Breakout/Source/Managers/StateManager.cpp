@@ -3,6 +3,7 @@
 #include "./Managers/ScoreManager.h"
 #include "./Managers/StateManager.h"
 #include "./States/GameState.h"
+#include "Managers/AudioManager.h"
 
 
 //Timer
@@ -14,6 +15,9 @@ const Uint8* g_KeyStates = nullptr;
 
 //Scoring Manager
 ScoreManager scoreManager;
+
+//Audio Manager
+AudioManager audioManager;
 
 void StateManager::Init(bool isFullscreen)
 {
@@ -40,6 +44,8 @@ void StateManager::Init(bool isFullscreen)
 	g_KeyStates = SDL_GetKeyboardState(nullptr);
 
 	scoreManager.Init();
+
+	audioManager.LoadSound("Assets/Audio/Hit.wav");
 
 	m_IsRunning = true;
 }
@@ -122,4 +128,9 @@ SDL_Renderer* StateManager::GetRenderer()
 ScoreManager* StateManager::GetScoreManager()
 {
 	return &scoreManager;
+}
+
+AudioManager* StateManager::GetAudioManager()
+{
+	return &audioManager;
 }

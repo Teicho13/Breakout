@@ -6,6 +6,7 @@ struct SDL_Renderer;
 
 class GameState;
 class ScoreManager;
+class AudioManager;
 
 class StateManager
 {
@@ -25,6 +26,7 @@ public:
 
 	SDL_Renderer* GetRenderer();
 	ScoreManager* GetScoreManager();
+	AudioManager* GetAudioManager();
 
 
 	//WINDOW / SCREEN CONFIG

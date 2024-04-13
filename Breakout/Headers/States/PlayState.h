@@ -42,4 +42,5 @@ private:
 	static PlayState m_PlayState;
 	bool m_GameStarted = false;
 	ScoreManager* m_ScoreManager = nullptr;
+	StateManager* m_StateManager = nullptr;
 };

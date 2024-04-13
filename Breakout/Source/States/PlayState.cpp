@@ -5,9 +5,10 @@
 #include "States/MenuState.h"
 
 #include "Entities/Vaus.h"
-#include "Entities/EngergyBall.h"
+#include "Entities/EnergyBall.h"
 #include "Managers/BrickManager.h"
 #include "Core/Collision.h"
+#include "Managers/AudioManager.h"
 #include "Managers/ScoreManager.h"
 
 PlayState PlayState::m_PlayState;
@@ -16,6 +17,8 @@ BrickManager brickManager;
 void PlayState::Init(StateManager* manager)
 {
 	std::cout << "Init PlayState \n";
+
+	m_StateManager = manager;
 
 	m_ScoreManager = manager->GetScoreManager();
 
@@ -53,6 +56,7 @@ void PlayState::Tick(StateManager* manager,float deltaTime)
 			m_GameStarted = false;
 			m_Player->ReduceLives(1);
 			ResetGame();
+			return;
 		}
 
 		CheckCollisions();
@@ -126,11 +130,15 @@ void PlayState::CheckCollisions()
 	if(brickManager.CheckCollision(m_EnergyBall))
 	{
 		m_ScoreManager->AddScore(1);
+		m_StateManager->GetAudioManager()->LoadSound("Assets/Audio/Hit.wav");
+		m_StateManager->GetAudioManager()->PlaySound();
 	}
 	
 	//Check for circle collision with player.
 	if (Breakout::Collision::CircleRect(m_EnergyBall->GetTransform(), m_Player->GetTransform())) 
 	{
+		m_StateManager->GetAudioManager()->LoadSound("Assets/Audio/Bounce.wav");
+		m_StateManager->GetAudioManager()->PlaySound();
 		m_EnergyBall->BouncePlayer(m_Player);
 	}
 }
@@ -144,6 +152,8 @@ void PlayState::ResetGame()
 	}
 	else
 	{
+		m_StateManager->GetAudioManager()->LoadSound("Assets/Audio/Break.wav");
+		m_StateManager->GetAudioManager()->PlaySound();
 		GameOver();
 	}
 }

@@ -4,7 +4,7 @@
 
 #include "Managers/BrickManager.h"
 #include "Core/Collision.h"
-#include "Entities/EngergyBall.h"
+#include "Entities/EnergyBall.h"
 
 
 typedef std::mt19937 rng_type;
