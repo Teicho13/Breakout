@@ -30,7 +30,6 @@ void PlayState::Init(StateManager* manager)
 
 	brickManager.SetRenderer(manager->GetRenderer());
 	brickManager.CreateBricks(54, 18);
-
 }
 
 void PlayState::Tick(StateManager* manager,float deltaTime)
@@ -52,7 +51,7 @@ void PlayState::Tick(StateManager* manager,float deltaTime)
 		if (m_EnergyBall->GetTransform().y + m_EnergyBall->GetTransform().h >= 720.f)
 		{
 			m_GameStarted = false;
-			ReduceLives(1);
+			m_Player->ReduceLives(1);
 			ResetGame();
 		}
 
@@ -138,7 +137,7 @@ void PlayState::CheckCollisions()
 
 void PlayState::ResetGame()
 {
-	if(m_Lives > 0)
+	if(m_Player->GetLives() > 0)
 	{
 		m_Player->SetPosition(600.f, 636.f);
 		m_EnergyBall->SetPosition(655.f, 611.f);
@@ -157,17 +156,4 @@ void PlayState::GameOver()
 	}
 }
 
-void PlayState::ReduceLives(int amount)
-{
-	m_Lives -= amount;
 
-	if(m_Lives < 0)
-	{
-		m_Lives = 0;
-	}
-}
-
-int PlayState::GetLives()
-{
-	return m_Lives;
-}

@@ -17,9 +17,11 @@ public:
 
 	void Draw();
 
-private:
-	
+protected:
 	SDL_Texture* m_Sprite = nullptr;
 	SDL_Renderer* m_Renderer = nullptr;
+
+private:
+	
 	SDL_FRect m_Transform;
 };

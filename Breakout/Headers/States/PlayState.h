@@ -25,10 +25,6 @@ public:
 	void ResetGame();
 	void GameOver();
 
-	void ReduceLives(int amount);
-	int GetLives();
-
-
 	//Terrain
 	Entity* m_Background = nullptr;
 	Entity* m_TopLine = nullptr;
@@ -45,6 +41,5 @@ protected:
 private:
 	static PlayState m_PlayState;
 	bool m_GameStarted = false;
-	int m_Lives = 3;
 	ScoreManager* m_ScoreManager = nullptr;
 };

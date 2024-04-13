@@ -1,8 +1,11 @@
 #include "./Entities/Vaus.h"
 
+#include "Core/TextureManager.h"
+
 Vaus::Vaus(const char* filePath, SDL_Renderer* renderer, float width, float height, float posX, float posY) 
 	: Entity(filePath, renderer, width, height, posX, posY)
 {
+	m_Lives = 3;
 }
 
 void Vaus::Move(int direction, float dt)
@@ -28,6 +31,32 @@ void Vaus::SetSpeed(float speed)
 float Vaus::GetSpeed()
 {
 	return m_Speed;
+}
+
+void Vaus::ReduceLives(int amount)
+{
+	m_Lives -= amount;
+
+	switch(m_Lives)
+	{
+	case 2:
+		SDL_DestroyTexture(m_Sprite);
+		m_Sprite = TextureManager::CreateTexture("Assets/Images/Entities/VausPartialDamage.png", m_Renderer);
+		break;
+	case 1:
+		SDL_DestroyTexture(m_Sprite);
+		m_Sprite = TextureManager::CreateTexture("Assets/Images/Entities/VausCriticalDamage.png", m_Renderer);
+		break;
+	case 0:
+		SDL_DestroyTexture(m_Sprite);
+		m_Sprite = TextureManager::CreateTexture("Assets/Images/Entities/VausDead.png", m_Renderer);
+		break;
+	}
+}
+
+int Vaus::GetLives()
+{
+	return m_Lives;
 }
 
 Breakout::vec2 Vaus::GetNormal()

@@ -13,8 +13,12 @@ public:
 	void SetSpeed(float speed);
 	float GetSpeed();
 
+	void ReduceLives(int amount);
+	int GetLives();
+
 	Breakout::vec2 GetNormal();
 
 private:
 	float m_Speed = 600.f;
+	int m_Lives = 3;
 };
