@@ -77,6 +77,13 @@ void PlayState::Tick(StateManager* manager,float deltaTime)
 
 		//Check for collision with bricks / player and ball 
 		CheckCollisions();
+
+		if(brickManager.count <= 0)
+		{
+			brickManager.ClearBricks();
+			brickManager.count = 0;
+			brickManager.CreateBricks(54, 18);
+		}
 	}
 }
 

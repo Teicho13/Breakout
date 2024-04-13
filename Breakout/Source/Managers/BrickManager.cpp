@@ -63,6 +63,9 @@ void BrickManager::CreateBricks(int amount, int rowMax)
 		m_Bricks.emplace_back(Brick(filePath, m_Renderer, 65.f, 32.f, offsetX + (placementX * column), offsetY + (placementY * row),isSolid));
 
 		column++;
+
+		if(!isSolid)
+			count++;
 	}
 }
 
@@ -89,6 +92,7 @@ bool BrickManager::CheckCollision(EnergyBall* energyBall)
 				m_Bricks.erase(m_Bricks.begin() + i);
 				energyBall->m_Direction.x *= -1.f;
 				energyBall->m_Direction.y *= -1.f;
+				count--;
 				return true;
 			}
 			energyBall->m_Direction.x *= -1.f;

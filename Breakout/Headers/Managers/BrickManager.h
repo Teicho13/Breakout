@@ -22,6 +22,8 @@ public:
 
 	const char* GetBrickTexture(const char* &filePath, int row, bool solid);
 
+	int count = 0;
+
 private:
 	SDL_Renderer* m_Renderer = nullptr;
 	std::vector<Brick> m_Bricks;
