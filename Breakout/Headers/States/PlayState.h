@@ -21,7 +21,13 @@ public:
 	//Game Functions
 	void CheckCollisions();
 
+	//Terrain
 	Entity* m_Background = nullptr;
+	Entity* m_TopLine = nullptr;
+	Entity* m_LeftLine = nullptr;
+	Entity* m_RightLine = nullptr;
+
+
 	Vaus* m_Player = nullptr;
 	EnergyBall* m_EnergyBall = nullptr;
 

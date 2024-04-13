@@ -194,21 +194,21 @@ void EnergyBall::BrickWallHit(Brick& brick)
 
 void EnergyBall::CheckBounds(SDL_FRect& tmpRec)
 {
-	if (tmpRec.x + tmpRec.w >= 1280.f)
+	if (tmpRec.x + tmpRec.w + 17.f >= 1280.f)
 	{
-		tmpRec.x = 1280.f - tmpRec.w;
+		tmpRec.x = 1280.f - tmpRec.w - 17.f;
 		m_Direction.x *= -1;
 	}
 
-	if (tmpRec.x <= 0.f) 
+	if (tmpRec.x <= 0.f + 17.f) 
 	{
-		tmpRec.x = 0.f;
+		tmpRec.x = 0.f + 17.f;
 		m_Direction.x *= -1;
 	}
 
-	if (tmpRec.y <= 0.0f)
+	if (tmpRec.y <= 0.0f + 16.f)
 	{
-		tmpRec.y = 0.f;
+		tmpRec.y = 0.f + 16.f;
 		m_Direction.y *= -1;
 	}
 

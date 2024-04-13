@@ -17,6 +17,9 @@ void PlayState::Init(StateManager* manager)
 	std::cout << "Init PlayState \n";
 
 	m_Background = new Entity("Assets/Images/Maps/BackgroundBlue.png", manager->GetRenderer(), 1280.f, 720.f, 0.f, 0.f);
+	m_TopLine = new Entity("Assets/Images/Maps/TopLine.png", manager->GetRenderer(), 1280.f, 16.f, 0.f, 0.f);
+	m_LeftLine = new Entity("Assets/Images/Maps/SideLine.png", manager->GetRenderer(), 17.f, 720.f, 0.f, 0.f);
+	m_RightLine = new Entity("Assets/Images/Maps/SideLine.png", manager->GetRenderer(), 17.f, 720.f, static_cast<float>(manager->m_WindowWidth) - 17.f, 0.f);
 
 	m_Player = new Vaus("Assets/Images/Entities/Vaus.png", manager->GetRenderer(), 135.f, 24.f, 600.f, 686.f);
 
@@ -51,14 +54,22 @@ void PlayState::Shutdown()
 	delete m_Background;
 	delete m_Player;
 	delete m_EnergyBall;
+
+	delete m_LeftLine;
+	delete m_RightLine;
+	delete m_TopLine;
 }
 
 void PlayState::Render(StateManager* manager)
 {
 	m_Background->Draw();
 	m_Player->Draw();
-	m_EnergyBall->Draw();
 	brickManager.DrawBricks();
+	m_EnergyBall->Draw();
+
+	m_LeftLine->Draw();
+	m_RightLine->Draw();
+	m_TopLine->Draw();
 }
 
 void PlayState::HandleEvents(StateManager* manager)
