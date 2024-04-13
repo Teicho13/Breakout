@@ -149,7 +149,6 @@
     <ClCompile Include="Source\Managers\ScoreManager.cpp" />
     <ClCompile Include="Source\Managers\StateManager.cpp" />
     <ClCompile Include="Source\States\GameOverState.cpp" />
-    <ClCompile Include="Source\States\GameState.cpp" />
     <ClCompile Include="Source\Core\Collision.cpp" />
     <ClCompile Include="Headers\Core\TextureManager.h" />
     <ClCompile Include="Source\Entities\EnergyBall.cpp" />

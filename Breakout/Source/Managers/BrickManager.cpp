@@ -48,7 +48,7 @@ void BrickManager::CreateBricks(int amount, int rowMax)
 		}
 
 		
-
+		//Get Random number to determine weather it is a destructible brick or not
 		int randVal = GetRandomNumber(0, 9);
 		bool isSolid = false;
 
@@ -57,6 +57,7 @@ void BrickManager::CreateBricks(int amount, int rowMax)
 			isSolid = true;
 		}
 
+		//Get Brick texture based on the row
 		filePath = GetBrickTexture(filePath, row, isSolid);
 		
 		m_Bricks.emplace_back(Brick(filePath, m_Renderer, 65.f, 32.f, offsetX + (placementX * column), offsetY + (placementY * row),isSolid));

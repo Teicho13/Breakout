@@ -15,6 +15,7 @@ void EnergyBall::Move(float dt)
 	SDL_FRect tmpRec = GetTransform();
 	tmpRec.x += m_Direction.x * dt;
 	tmpRec.y += m_Direction.y * dt;
+	//Check if bounds (left top right side) are hit
 	CheckBounds(tmpRec);
 	SetPosition(tmpRec);
 }
@@ -135,6 +136,9 @@ void EnergyBall::BounceBrick(int side)
 
 	SetDirection(mulx * m_Direction.x, muly * m_Direction.y);
 }
+
+//What happened here was I originally wanted to use this,
+//but due to not being able to get it working for a while I decided to leave it since it was taking to0 much time
 
 void EnergyBall::BrickWallHit(Brick& brick)
 {

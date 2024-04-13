@@ -27,6 +27,7 @@ void ScoreManager::ReductScore(int amount)
 
 void ScoreManager::SaveHighScore()
 {
+	//Save Score to local file
 	std::ofstream file("PlayerScore.txt");
 	file << m_Score;
 	file.close();
@@ -34,6 +35,7 @@ void ScoreManager::SaveHighScore()
 
 void ScoreManager::LoadHighScore()
 {
+	//Get score from local file if exists
 	std::ifstream file("PlayerScore.txt");
 	if(file.is_open())
 	{
@@ -50,6 +52,7 @@ void ScoreManager::LoadHighScore()
 
 void ScoreManager::ClearHighScore()
 {
+	//Clear highscore and clear from file if exists
 	m_HighScore = 0;
 	std::ifstream file("PlayerScore.txt");
 	if(file.is_open())

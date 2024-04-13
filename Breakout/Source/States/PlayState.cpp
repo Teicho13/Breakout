@@ -21,18 +21,25 @@ void PlayState::Init(StateManager* manager)
 
 	m_StateManager = manager;
 
+	//Initialize and reset score
+
 	m_ScoreManager = manager->GetScoreManager();
 
 	m_ScoreManager->ClearScore();
+
+	//Create all map Visuals for the game
 
 	m_Background = new Entity("Assets/Images/Maps/BackgroundBlue.png", manager->GetRenderer(), 1280.f, 720.f, 0.f, 0.f);
 	m_TopLine = new Entity("Assets/Images/Maps/TopLine.png", manager->GetRenderer(), 1280.f, 16.f, 0.f, 0.f);
 	m_LeftLine = new Entity("Assets/Images/Maps/SideLine.png", manager->GetRenderer(), 17.f, 720.f, 0.f, 0.f);
 	m_RightLine = new Entity("Assets/Images/Maps/SideLine.png", manager->GetRenderer(), 17.f, 720.f, static_cast<float>(manager->m_WindowWidth) - 17.f, 0.f);
 
-	m_Player = new Vaus("Assets/Images/Entities/Vaus.png", manager->GetRenderer(), 135.f, 24.f, 600.f, 636.f);
+	//Create Player and ball
 
+	m_Player = new Vaus("Assets/Images/Entities/Vaus.png", manager->GetRenderer(), 135.f, 24.f, 600.f, 636.f);
 	m_EnergyBall = new EnergyBall("Assets/Images/Entities/EnergyBall.png", manager->GetRenderer(), 25.f, 25.f, 655.f, 611.f);
+
+	//Initialize brick manager and spawn all bricks
 
 	brickManager.SetRenderer(manager->GetRenderer());
 	brickManager.CreateBricks(54, 18);
@@ -42,6 +49,8 @@ void PlayState::Tick(StateManager* manager,float deltaTime)
 {
 	if(m_GameStarted)
 	{
+		//Simple input check for player movement
+
 		if (manager->GetKeyboardState()[SDL_SCANCODE_D])
 		{
 			m_Player->Move(1, deltaTime);
@@ -52,7 +61,11 @@ void PlayState::Tick(StateManager* manager,float deltaTime)
 			m_Player->Move(-1, deltaTime);
 		}
 
+		//Update Ball movement
+
 		m_EnergyBall->Move(deltaTime);
+
+		//Ball collision check with the ground
 
 		if (m_EnergyBall->GetTransform().y + m_EnergyBall->GetTransform().h >= 720.f)
 		{
@@ -62,6 +75,7 @@ void PlayState::Tick(StateManager* manager,float deltaTime)
 			return;
 		}
 
+		//Check for collision with bricks / player and ball 
 		CheckCollisions();
 	}
 }
@@ -148,6 +162,8 @@ void PlayState::CheckCollisions()
 
 void PlayState::ResetGame()
 {
+	//Reset the game. Move play and ball to starting position or stop game when no more lives
+
 	if(m_Player->GetLives() > 0)
 	{
 		m_Player->SetPosition(600.f, 636.f);
@@ -167,7 +183,7 @@ void PlayState::GameOver()
 	{
 		m_ScoreManager->SaveHighScore();
 	}
-	SDL_Delay(3000);
+	SDL_Delay(1000);
 	m_StateManager->ChangeState(GameOverState::Instance());
 }
 

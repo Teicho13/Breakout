@@ -21,12 +21,12 @@ public:
 	void PushState(GameState* state) {}
 	void RemoveState();
 
-	bool GetIsRunning();
-	const Uint8* GetKeyboardState();
+	bool GetIsRunning() const;
+	const Uint8* GetKeyboardState() const;
 
-	SDL_Renderer* GetRenderer();
-	ScoreManager* GetScoreManager();
-	AudioManager* GetAudioManager();
+	SDL_Renderer* GetRenderer() const;
+	ScoreManager* GetScoreManager() const;
+	AudioManager* GetAudioManager() const;
 
 
 	//WINDOW / SCREEN CONFIG

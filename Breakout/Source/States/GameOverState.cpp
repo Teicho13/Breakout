@@ -17,10 +17,17 @@ void GameOverState::Init(StateManager* manager)
 
 	m_Renderer = manager->GetRenderer();
 
+	//Create Text image for score and highscore
+
 	m_Score = new Entity("Assets/Images/UI/Score.png", manager->GetRenderer(), 257, 49.f, (static_cast<float>(manager->m_WindowWidth) / 2.f) - (257.f / 2.f), 50.f);
 	m_HighScore = new Entity("Assets/Images/UI/HighScore.png", manager->GetRenderer(), 465, 49.f, (static_cast<float>(manager->m_WindowWidth) / 2.f) - (465 / 2.f), 300.f);
 
+	//TODO: Implement Sprite class, sprite class can take in a texture sheet so you can easily switch between images in a single object.
+
+	//Divide current score and highscore into an array of integers
 	CreateNumberArray(manager->GetScoreManager()->GetScore(),manager->GetScoreManager()->GetHighScore());
+
+	//Create Images for each number according to previous scores
 	CreateNumbers();
 	CreateHighScoreNumbers();
 }

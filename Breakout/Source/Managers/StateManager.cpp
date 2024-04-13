@@ -45,8 +45,7 @@ void StateManager::Init(bool isFullscreen)
 
 	scoreManager.Init();
 
-	audioManager.LoadSound("Assets/Audio/Hit.wav");
-
+	//Initialize is done and set game to run
 	m_IsRunning = true;
 }
 
@@ -57,6 +56,7 @@ void StateManager::Update()
 	g_Time = SDL_GetPerformanceCounter();
 	m_DeltaTime = ((g_Time - g_LastTime) / static_cast<double>(SDL_GetPerformanceFrequency()));
 
+	//Tick the top / latest state
 	m_States.back()->Tick(this,m_DeltaTime);
 }
 
@@ -77,10 +77,10 @@ void StateManager::HandleEvents()
 void StateManager::Render()
 {
 	//Clear render screen for new frame
-	//SDL_SetRenderDrawColor(m_Renderer, 27, 146, 214, 255);
 	SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
 	SDL_RenderClear(m_Renderer);
 
+	//Render Objects from current state
 	m_States.back()->Render(this);
 
 	//Render everything to the screen
@@ -92,6 +92,7 @@ void StateManager::ChangeState(GameState* state)
 	//Remove current state
 	if (!m_States.empty())
 	{
+		//call Shutdown for current state before removal to clean up.
 		m_States.back()->Shutdown();
 		m_States.pop_back();
 	}
@@ -105,32 +106,33 @@ void StateManager::RemoveState()
 	//Remove current state
 	if (!m_States.empty())
 	{
+		//call Shutdown for current state before removal to clean up.
 		m_States.back()->Shutdown();
 		m_States.pop_back();
 	}
 }
 
-bool StateManager::GetIsRunning()
+bool StateManager::GetIsRunning() const
 {
 	return m_IsRunning;
 }
 
-const Uint8* StateManager::GetKeyboardState()
+const Uint8* StateManager::GetKeyboardState() const
 {
 	return g_KeyStates;
 }
 
-SDL_Renderer* StateManager::GetRenderer()
+SDL_Renderer* StateManager::GetRenderer() const
 {
 	return m_Renderer;
 }
 
-ScoreManager* StateManager::GetScoreManager()
+ScoreManager* StateManager::GetScoreManager() const
 {
 	return &scoreManager;
 }
 
-AudioManager* StateManager::GetAudioManager()
+AudioManager* StateManager::GetAudioManager() const
 {
 	return &audioManager;
 }

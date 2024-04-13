@@ -16,11 +16,13 @@ void MenuState::Init(StateManager* manager)
 {
 	std::cout << "Init Menu State \n";
 
+	//Create all UI for the menu
+
 	m_Title = new Entity("Assets/Images/UI/Title.png", manager->GetRenderer(), 582.f, 126.f, (static_cast<float>(manager->m_WindowWidth) / 2.f) - (582.f / 2.f), 50.f);
 	m_StartButton = new Entity("Assets/Images/UI/Start.png", manager->GetRenderer(), 262.f, 88.f, (static_cast<float>(manager->m_WindowWidth) / 2.f) - (262.f / 2.f), 300.f);
 	m_QuitButton = new Entity("Assets/Images/UI/Quit.png", manager->GetRenderer(), 229.f, 77.f, (static_cast<float>(manager->m_WindowWidth) / 2.f) - (229.f / 2.f), 500.f);
 
-	//Create background stars
+	//Create background stars and randomize positions
 	srand((unsigned)time(NULL));
 
 	for (int i = 0; i < sizeof(stars) / sizeof(stars[0]); i++)
@@ -100,8 +102,9 @@ void MenuState::HandleEvents(StateManager* manager)
 
 void MenuState::CheckButtonClicked(StateManager* manager, const float x, const float y)
 {
+	//On Mouse click check mouse position and check if it overlaps with either of the 2 buttons
 
-	SDL_FRect tempRect(x, y, 1, 1);
+	SDL_FRect tempRect(x, y, 1.f, 1.f);
 	if (Breakout::Collision::AABB(tempRect, m_StartButton->GetTransform()))
 	{
 		manager->ChangeState(PlayState::Instance());
