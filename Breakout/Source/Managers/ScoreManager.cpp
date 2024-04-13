@@ -59,6 +59,11 @@ void ScoreManager::ClearHighScore()
 	file.close();
 }
 
+void ScoreManager::ClearScore()
+{
+	m_Score = 0;
+}
+
 int ScoreManager::GetScore()
 {
 	return m_Score;

@@ -3,6 +3,7 @@
 
 #include "States/PlayState.h"
 #include "States/MenuState.h"
+#include "States/GameOverState.h"
 
 #include "Entities/Vaus.h"
 #include "Entities/EnergyBall.h"
@@ -21,6 +22,8 @@ void PlayState::Init(StateManager* manager)
 	m_StateManager = manager;
 
 	m_ScoreManager = manager->GetScoreManager();
+
+	m_ScoreManager->ClearScore();
 
 	m_Background = new Entity("Assets/Images/Maps/BackgroundBlue.png", manager->GetRenderer(), 1280.f, 720.f, 0.f, 0.f);
 	m_TopLine = new Entity("Assets/Images/Maps/TopLine.png", manager->GetRenderer(), 1280.f, 16.f, 0.f, 0.f);
@@ -164,6 +167,8 @@ void PlayState::GameOver()
 	{
 		m_ScoreManager->SaveHighScore();
 	}
+	SDL_Delay(3000);
+	m_StateManager->ChangeState(GameOverState::Instance());
 }
 
 

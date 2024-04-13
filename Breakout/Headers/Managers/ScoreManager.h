@@ -10,6 +10,7 @@ public:
 	void SaveHighScore();
 	void LoadHighScore();
 	void ClearHighScore();
+	void ClearScore();
 
 	int GetScore();
 	int GetHighScore();

@@ -144,9 +144,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Entities\MenuStar.cpp" />
+    <ClCompile Include="Source\Entities\Number.cpp" />
     <ClCompile Include="Source\Managers\AudioManager.cpp" />
     <ClCompile Include="Source\Managers\ScoreManager.cpp" />
     <ClCompile Include="Source\Managers\StateManager.cpp" />
+    <ClCompile Include="Source\States\GameOverState.cpp" />
     <ClCompile Include="Source\States\GameState.cpp" />
     <ClCompile Include="Source\Core\Collision.cpp" />
     <ClCompile Include="Headers\Core\TextureManager.h" />
@@ -176,11 +178,13 @@
     <ClInclude Include="Headers\Entities\Brick.h" />
     <ClInclude Include="Headers\Entities\Entity.h" />
     <ClInclude Include="Headers\Entities\MenuStar.h" />
+    <ClInclude Include="Headers\Entities\Number.h" />
     <ClInclude Include="Headers\Entities\Vaus.h" />
     <ClInclude Include="Headers\Managers\AudioManager.h" />
     <ClInclude Include="Headers\Managers\BrickManager.h" />
     <ClInclude Include="Headers\Managers\ScoreManager.h" />
     <ClInclude Include="Headers\Managers\StateManager.h" />
+    <ClInclude Include="Headers\States\GameOverState.h" />
     <ClInclude Include="Headers\States\GameState.h" />
     <ClInclude Include="Headers\States\MenuState.h" />
     <ClInclude Include="Headers\States\PlayState.h" />
