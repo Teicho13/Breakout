@@ -17,7 +17,7 @@ public:
 
 	void ChangeState(GameState* state);
 	void PushState(GameState* state) {}
-	void RemoveState() {}
+	void RemoveState();
 
 	bool GetIsRunning();
 	const Uint8* GetKeyboardState();

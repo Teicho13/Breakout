@@ -86,6 +86,16 @@ void StateManager::ChangeState(GameState* state)
 	m_States.back()->Init(this);
 }
 
+void StateManager::RemoveState()
+{
+	//Remove current state
+	if (!m_States.empty())
+	{
+		m_States.back()->Shutdown();
+		m_States.pop_back();
+	}
+}
+
 bool StateManager::GetIsRunning()
 {
 	return m_IsRunning;

@@ -173,7 +173,6 @@
     <ClInclude Include="Headers\Entities\Brick.h" />
     <ClInclude Include="Headers\Entities\Entity.h" />
     <ClInclude Include="Headers\Entities\Vaus.h" />
-    <ClInclude Include="Headers\main.h" />
     <ClInclude Include="Headers\Managers\BrickManager.h" />
     <ClInclude Include="Headers\Managers\StateManager.h" />
     <ClInclude Include="Headers\States\GameState.h" />

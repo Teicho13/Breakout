@@ -2,13 +2,8 @@
 #include <SDL_image.h>
 #include <iostream>
 
-
-#include "main.h"
-
 #include "./Managers/StateManager.h"
-#include "./States/PlayState.h"
-
-#include "./Core/TextureManager.h"
+#include "States/MenuState.h"
 
 
 int main(int argc, char** argv)
@@ -20,7 +15,7 @@ int main(int argc, char** argv)
 	stateManager.Init(false);
 
 	//Load Play State singelton
-	stateManager.ChangeState(PlayState::Instance());
+	stateManager.ChangeState(MenuState::Instance());
 
 	while (stateManager.GetIsRunning())
 	{		

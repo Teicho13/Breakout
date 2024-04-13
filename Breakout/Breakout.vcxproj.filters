@@ -64,9 +64,6 @@
     <CopyFileToFolders Include="Dependencies\SDL2-image\lib\x64\libwebp-7.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Headers\main.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Headers\Entities\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
