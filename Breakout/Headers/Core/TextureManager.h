@@ -12,4 +12,5 @@ public:
 
 	static void RenderRect(SDL_Renderer* renderer, const SDL_Rect* rectangle);
 	static void RenderSolidRect(SDL_Renderer* renderer, const SDL_Rect* rectangle);
+	static void RenderDot(SDL_Renderer* renderer, int x, int y);
 };

@@ -16,6 +16,8 @@ public:
 
 	//UI
 	void CheckButtonClicked(StateManager* manager, const float x, const float y);
+	void UpdateStars(float dt);
+	void RenderStars();
 
 	Entity* m_Title = nullptr;
 	Entity* m_StartButton = nullptr;

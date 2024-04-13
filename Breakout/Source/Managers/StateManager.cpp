@@ -64,7 +64,8 @@ void StateManager::HandleEvents()
 void StateManager::Render()
 {
 	//Clear render screen for new frame
-	SDL_SetRenderDrawColor(m_Renderer, 27, 146, 214, 255);
+	//SDL_SetRenderDrawColor(m_Renderer, 27, 146, 214, 255);
+	SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
 	SDL_RenderClear(m_Renderer);
 
 	m_States.back()->Render(this);

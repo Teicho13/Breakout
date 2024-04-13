@@ -6,26 +6,44 @@
 
 #include "./Entities/Entity.h"
 #include "Core/Collision.h"
+#include "Entities/MenuStar.h"
 
 MenuState MenuState::m_MenuState;
+
+MenuStar* stars[60];
 
 void MenuState::Init(StateManager* manager)
 {
 	std::cout << "Init Menu State \n";
 
-	m_Title = new Entity("Assets/Images/UI/Title.png", manager->GetRenderer(), 582.f, 126.f, (static_cast<float>(manager->m_WindowWidth) / 2.f) - (582.f / 2.f), 0.f);
+	m_Title = new Entity("Assets/Images/UI/Title.png", manager->GetRenderer(), 582.f, 126.f, (static_cast<float>(manager->m_WindowWidth) / 2.f) - (582.f / 2.f), 50.f);
 	m_StartButton = new Entity("Assets/Images/UI/Start.png", manager->GetRenderer(), 262.f, 88.f, (static_cast<float>(manager->m_WindowWidth) / 2.f) - (262.f / 2.f), 300.f);
 	m_QuitButton = new Entity("Assets/Images/UI/Quit.png", manager->GetRenderer(), 229.f, 77.f, (static_cast<float>(manager->m_WindowWidth) / 2.f) - (229.f / 2.f), 500.f);
+
+	//Create background stars
+	srand((unsigned)time(NULL));
+
+	for (int i = 0; i < sizeof(stars) / sizeof(stars[0]); i++)
+	{
+		stars[i] = new MenuStar(manager->GetRenderer());
+	}
 }
 
 void MenuState::Tick(StateManager* manager, float deltaTime)
 {
-
-	//std::cout << "X: " << mouseX << " Y: " << mouseY << std::endl;
+	UpdateStars(deltaTime);
 }
 
 void MenuState::Shutdown()
 {
+
+	//Remove all stars
+
+	for (int i = 0; i < sizeof(stars) / sizeof(stars[0]); i++)
+	{
+		delete stars[i];
+	}
+
 	delete m_Title;
 	delete m_StartButton;
 	delete m_QuitButton;
@@ -33,6 +51,8 @@ void MenuState::Shutdown()
 
 void MenuState::Render(StateManager* manager)
 {
+	RenderStars();
+
 	m_Title->Draw();
 	m_StartButton->Draw();
 	m_QuitButton->Draw();
@@ -90,5 +110,21 @@ void MenuState::CheckButtonClicked(StateManager* manager, const float x, const f
 	if (Breakout::Collision::AABB(tempRect, m_QuitButton->GetTransform()))
 	{
 		manager->Shutdown();
+	}
+}
+
+void MenuState::UpdateStars(float dt)
+{
+	for (int i = 0; i < sizeof(stars) / sizeof(stars[0]); i++)
+	{
+		stars[i]->Update(dt);
+	}
+}
+
+void MenuState::RenderStars()
+{
+	for (int i = 0; i < sizeof(stars) / sizeof(stars[0]); i++)
+	{
+		stars[i]->Draw();
 	}
 }

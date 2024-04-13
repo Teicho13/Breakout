@@ -27,3 +27,9 @@ void TextureManager::RenderSolidRect(SDL_Renderer* renderer, const SDL_Rect* rec
 	SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
 	SDL_RenderFillRect(renderer, rectangle);
 }
+
+void TextureManager::RenderDot(SDL_Renderer* renderer, int x, int y)
+{
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+	SDL_RenderDrawPoint(renderer, x, y);
+}

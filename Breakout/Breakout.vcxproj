@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Entities\MenuStar.cpp" />
     <ClCompile Include="Source\Managers\StateManager.cpp" />
     <ClCompile Include="Source\States\GameState.cpp" />
     <ClCompile Include="Source\Core\Collision.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="Headers\Core\Math.h" />
     <ClInclude Include="Headers\Entities\Brick.h" />
     <ClInclude Include="Headers\Entities\Entity.h" />
+    <ClInclude Include="Headers\Entities\MenuStar.h" />
     <ClInclude Include="Headers\Entities\Vaus.h" />
     <ClInclude Include="Headers\Managers\BrickManager.h" />
     <ClInclude Include="Headers\Managers\StateManager.h" />
