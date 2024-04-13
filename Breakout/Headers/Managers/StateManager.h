@@ -5,6 +5,7 @@ struct SDL_Window;
 struct SDL_Renderer;
 
 class GameState;
+class ScoreManager;
 
 class StateManager
 {
@@ -23,6 +24,7 @@ public:
 	const Uint8* GetKeyboardState();
 
 	SDL_Renderer* GetRenderer();
+	ScoreManager* GetScoreManager();
 
 
 	//WINDOW / SCREEN CONFIG

@@ -16,7 +16,7 @@ public:
 	void CreateBricks(int amount, int rowMax);
 	void DrawBricks();
 
-	void CheckCollision(EnergyBall* energyBall);
+	bool CheckCollision(EnergyBall* energyBall);
 
 	void ClearBricks();
 

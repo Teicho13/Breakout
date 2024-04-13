@@ -77,7 +77,7 @@ void BrickManager::DrawBricks()
 }
 
 
-void BrickManager::CheckCollision(EnergyBall* energyBall)
+bool BrickManager::CheckCollision(EnergyBall* energyBall)
 {
 	for (size_t i = 0; i < m_Bricks.size(); i++)
 	{
@@ -88,12 +88,14 @@ void BrickManager::CheckCollision(EnergyBall* energyBall)
 				m_Bricks.erase(m_Bricks.begin() + i);
 				energyBall->m_Direction.x *= -1.f;
 				energyBall->m_Direction.y *= -1.f;
-				break;
+				return true;
 			}
 			energyBall->m_Direction.x *= -1.f;
 			energyBall->m_Direction.y *= -1.f;
+			return false;
 		}
 	}
+	return false;
 }
 
 void BrickManager::ClearBricks()

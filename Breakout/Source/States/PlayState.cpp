@@ -8,6 +8,7 @@
 #include "Entities/EngergyBall.h"
 #include "Managers/BrickManager.h"
 #include "Core/Collision.h"
+#include "Managers/ScoreManager.h"
 
 PlayState PlayState::m_PlayState;
 BrickManager brickManager;
@@ -15,6 +16,8 @@ BrickManager brickManager;
 void PlayState::Init(StateManager* manager)
 {
 	std::cout << "Init PlayState \n";
+
+	m_ScoreManager = manager->GetScoreManager();
 
 	m_Background = new Entity("Assets/Images/Maps/BackgroundBlue.png", manager->GetRenderer(), 1280.f, 720.f, 0.f, 0.f);
 	m_TopLine = new Entity("Assets/Images/Maps/TopLine.png", manager->GetRenderer(), 1280.f, 16.f, 0.f, 0.f);
@@ -120,7 +123,10 @@ void PlayState::HandleEvents(StateManager* manager)
 
 void PlayState::CheckCollisions()
 {
-	brickManager.CheckCollision(m_EnergyBall);
+	if(brickManager.CheckCollision(m_EnergyBall))
+	{
+		m_ScoreManager->AddScore(1);
+	}
 	
 	//Check for circle collision with player.
 	if (Breakout::Collision::CircleRect(m_EnergyBall->GetTransform(), m_Player->GetTransform())) 
@@ -133,4 +139,12 @@ void PlayState::ResetGame()
 {
 	m_Player->SetPosition(600.f, 636.f);
 	m_EnergyBall->SetPosition(655.f, 611.f);
+}
+
+void PlayState::GameOver()
+{
+	if(m_ScoreManager->GetScore() > m_ScoreManager->GetHighScore())
+	{
+		m_ScoreManager->SaveHighScore();
+	}
 }

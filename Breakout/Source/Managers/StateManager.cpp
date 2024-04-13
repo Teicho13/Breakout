@@ -1,7 +1,9 @@
 #include <SDL.h>
 
+#include "./Managers/ScoreManager.h"
 #include "./Managers/StateManager.h"
 #include "./States/GameState.h"
+
 
 //Timer
 Uint64 g_Time = 0;
@@ -9,6 +11,9 @@ Uint64 g_LastTime = 0;
 
 //Key States
 const Uint8* g_KeyStates = nullptr;
+
+//Scoring Manager
+ScoreManager scoreManager;
 
 void StateManager::Init(bool isFullscreen)
 {
@@ -33,6 +38,8 @@ void StateManager::Init(bool isFullscreen)
 
 	//Pointer to keyboard button states
 	g_KeyStates = SDL_GetKeyboardState(nullptr);
+
+	scoreManager.Init();
 
 	m_IsRunning = true;
 }
@@ -110,4 +117,9 @@ const Uint8* StateManager::GetKeyboardState()
 SDL_Renderer* StateManager::GetRenderer()
 {
 	return m_Renderer;
+}
+
+ScoreManager* StateManager::GetScoreManager()
+{
+	return &scoreManager;
 }

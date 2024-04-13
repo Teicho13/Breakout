@@ -22,6 +22,7 @@ public:
 	void CheckCollisions();
 	//Reset position of ball and player
 	void ResetGame();
+	void GameOver();
 
 
 	//Terrain
@@ -40,4 +41,5 @@ protected:
 private:
 	static PlayState m_PlayState;
 	bool m_GameStarted = false;
+	ScoreManager* m_ScoreManager = nullptr;
 };
