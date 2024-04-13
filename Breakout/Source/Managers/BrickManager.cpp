@@ -30,7 +30,7 @@ void BrickManager::CreateBricks(int amount, int rowMax)
 	float placementX = 65.f;
 	float placementY = 32.f;
 	float offsetX = 55.f;
-	float offsetY = 10.f;
+	float offsetY = 20.f;
 
 	int row = 0;
 	int column = 0;

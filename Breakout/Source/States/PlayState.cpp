@@ -52,6 +52,7 @@ void PlayState::Tick(StateManager* manager,float deltaTime)
 		if (m_EnergyBall->GetTransform().y + m_EnergyBall->GetTransform().h >= 720.f)
 		{
 			m_GameStarted = false;
+			ReduceLives(1);
 			ResetGame();
 		}
 
@@ -137,8 +138,15 @@ void PlayState::CheckCollisions()
 
 void PlayState::ResetGame()
 {
-	m_Player->SetPosition(600.f, 636.f);
-	m_EnergyBall->SetPosition(655.f, 611.f);
+	if(m_Lives > 0)
+	{
+		m_Player->SetPosition(600.f, 636.f);
+		m_EnergyBall->SetPosition(655.f, 611.f);
+	}
+	else
+	{
+		GameOver();
+	}
 }
 
 void PlayState::GameOver()
@@ -147,4 +155,19 @@ void PlayState::GameOver()
 	{
 		m_ScoreManager->SaveHighScore();
 	}
+}
+
+void PlayState::ReduceLives(int amount)
+{
+	m_Lives -= amount;
+
+	if(m_Lives < 0)
+	{
+		m_Lives = 0;
+	}
+}
+
+int PlayState::GetLives()
+{
+	return m_Lives;
 }

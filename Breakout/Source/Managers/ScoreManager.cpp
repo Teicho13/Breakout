@@ -19,12 +19,16 @@ void ScoreManager::AddScore(int amount)
 void ScoreManager::ReductScore(int amount)
 {
 	m_Score -= amount;
+	if(m_Score < 0)
+	{
+		m_Score = 0;
+	}
 }
 
 void ScoreManager::SaveHighScore()
 {
 	std::ofstream file("PlayerScore.txt");
-	file << m_HighScore;
+	file << m_Score;
 	file.close();
 }
 
