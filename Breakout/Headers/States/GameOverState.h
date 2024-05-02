@@ -7,11 +7,11 @@ class Number;
 class GameOverState : public GameState
 {
 public:
-	void Init(StateManager* manager);
-	void Tick(StateManager* manager, float deltaTime);
-	void Shutdown();
-	void Render(StateManager* manager);
-	void HandleEvents(StateManager* manager);
+	void Init(StateManager* manager) override;
+	void Tick(StateManager* manager, float deltaTime) override;
+	void Shutdown() override;
+	void Render(StateManager* manager) override;
+	void HandleEvents(StateManager* manager) override;
 
 	static GameOverState* Instance() { return &m_GameOverState; }
 
@@ -21,6 +21,8 @@ public:
 	void CreateNumbers();
 	void CreateHighScoreNumbers();
 	void RenderNumbers();
+
+	void DeleteNumbers();
 
 	Number* m_ScoreText[9];
 	int m_ScoreNumber[9];

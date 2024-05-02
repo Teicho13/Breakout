@@ -4,6 +4,9 @@
 #include <SDL.h>
 
 #include "./States/GameOverState.h"
+
+#include <string>
+
 #include "./States/MenuState.h"
 
 #include "./Entities/Number.h"
@@ -38,6 +41,8 @@ void GameOverState::Tick(StateManager* manager, float deltaTime)
 
 void GameOverState::Shutdown()
 {
+	DeleteNumbers();
+
 	delete m_Score;
 	delete m_HighScore;
 }
@@ -102,39 +107,8 @@ void GameOverState::CreateNumbers()
 
 	for (int i = 0; i < 9; ++i)
 	{
-		switch (m_ScoreNumber[i])
-		{
-		case 0:
-			m_ScoreText[i] = new Number("Assets/Images/Numbers/Number0.png", m_Renderer, 49.f, 49.f, offsetX + (49 * i), offsetY);
-			break;
-		case 1:
-			m_ScoreText[i] = new Number("Assets/Images/Numbers/Number1.png", m_Renderer, 49.f, 49.f, offsetX + (49 * i), offsetY);
-			break;
-		case 2:
-			m_ScoreText[i] = new Number("Assets/Images/Numbers/Number2.png", m_Renderer, 49.f, 49.f, offsetX + (49 * i), offsetY);
-			break;
-		case 3:
-			m_ScoreText[i] = new Number("Assets/Images/Numbers/Number3.png", m_Renderer, 49.f, 49.f, offsetX + (49 * i), offsetY);
-			break;
-		case 4:
-			m_ScoreText[i] = new Number("Assets/Images/Numbers/Number4.png", m_Renderer, 49.f, 49.f, offsetX + (49 * i), offsetY);
-			break;
-		case 5:
-			m_ScoreText[i] = new Number("Assets/Images/Numbers/Number5.png", m_Renderer, 49.f, 49.f, offsetX + (49 * i), offsetY);
-			break;
-		case 6:
-			m_ScoreText[i] = new Number("Assets/Images/Numbers/Number6.png", m_Renderer, 49.f, 49.f, offsetX + (49 * i), offsetY);
-			break;
-		case 7:
-			m_ScoreText[i] = new Number("Assets/Images/Numbers/Number7.png", m_Renderer, 49.f, 49.f, offsetX + (49 * i), offsetY);
-			break;
-		case 8:
-			m_ScoreText[i] = new Number("Assets/Images/Numbers/Number8.png", m_Renderer, 49.f, 49.f, offsetX + (49 * i), offsetY);
-			break;
-		case 9:
-			m_ScoreText[i] = new Number("Assets/Images/Numbers/Number9.png", m_Renderer, 49.f, 49.f, offsetX + (49 * i), offsetY);
-			break;
-		}
+		std::string assetPath = "Assets/Images/Numbers/Number" + std::to_string(i) + ".png";
+		m_ScoreText[i] = new Number(assetPath.c_str(), m_Renderer, 49.f, 49.f, offsetX + (49 * i), offsetY);
 	}
 }
 
@@ -144,39 +118,8 @@ void GameOverState::CreateHighScoreNumbers()
 	float offsetY = 400.f;
 	for (int i = 0; i < 9; ++i)
 	{
-		switch (m_HighScoreNumber[i])
-		{
-		case 0:
-			m_HighScoreText[i] = new Number("Assets/Images/Numbers/Number0.png", m_Renderer, 49.f, 49.f, (49 * i) + offsetX, offsetY);
-			break;
-		case 1:
-			m_HighScoreText[i] = new Number("Assets/Images/Numbers/Number1.png", m_Renderer, 49.f, 49.f, (49 * i) + offsetX, offsetY);
-			break;
-		case 2:
-			m_HighScoreText[i] = new Number("Assets/Images/Numbers/Number2.png", m_Renderer, 49.f, 49.f, (49 * i) + offsetX, offsetY);
-			break;
-		case 3:
-			m_HighScoreText[i] = new Number("Assets/Images/Numbers/Number3.png", m_Renderer, 49.f, 49.f, (49 * i) + offsetX, offsetY);
-			break;
-		case 4:
-			m_HighScoreText[i] = new Number("Assets/Images/Numbers/Number4.png", m_Renderer, 49.f, 49.f, (49 * i) + offsetX, offsetY);
-			break;
-		case 5:
-			m_HighScoreText[i] = new Number("Assets/Images/Numbers/Number5.png", m_Renderer, 49.f, 49.f, (49 * i) + offsetX, offsetY);
-			break;
-		case 6:
-			m_HighScoreText[i] = new Number("Assets/Images/Numbers/Number6.png", m_Renderer, 49.f, 49.f, (49 * i) + offsetX, offsetY);
-			break;
-		case 7:
-			m_HighScoreText[i] = new Number("Assets/Images/Numbers/Number7.png", m_Renderer, 49.f, 49.f, (49 * i) + offsetX, offsetY);
-			break;
-		case 8:
-			m_HighScoreText[i] = new Number("Assets/Images/Numbers/Number8.png", m_Renderer, 49.f, 49.f, (49 * i) + offsetX, offsetY);
-			break;
-		case 9:
-			m_HighScoreText[i] = new Number("Assets/Images/Numbers/Number9.png", m_Renderer, 49.f, 49.f, (49 * i) + offsetX, offsetY);
-			break;
-		}
+		std::string assetPath = "Assets/Images/Numbers/Number" + std::to_string(i) + ".png";
+		m_HighScoreText[i] = new Number(assetPath.c_str(), m_Renderer, 49.f, 49.f, (49 * i) + offsetX, offsetY);
 	}
 }
 
@@ -186,6 +129,15 @@ void GameOverState::RenderNumbers()
 	{
 		m_HighScoreText[i]->Draw();
 		m_ScoreText[i]->Draw();
+	}
+}
+
+void GameOverState::DeleteNumbers()
+{
+	for (int i = 0; i < 9; ++i)
+	{
+		delete m_ScoreText[i];
+		delete m_HighScoreText[i];
 	}
 }
 
