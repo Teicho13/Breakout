@@ -107,7 +107,7 @@ void GameOverState::CreateNumbers()
 
 	for (int i = 0; i < 9; ++i)
 	{
-		std::string assetPath = "Assets/Images/Numbers/Number" + std::to_string(i) + ".png";
+		std::string assetPath = "Assets/Images/Numbers/Number" + std::to_string(m_ScoreNumber[i]) + ".png";
 		m_ScoreText[i] = new Number(assetPath.c_str(), m_Renderer, 49.f, 49.f, offsetX + (49 * i), offsetY);
 	}
 }
@@ -118,7 +118,7 @@ void GameOverState::CreateHighScoreNumbers()
 	float offsetY = 400.f;
 	for (int i = 0; i < 9; ++i)
 	{
-		std::string assetPath = "Assets/Images/Numbers/Number" + std::to_string(i) + ".png";
+		std::string assetPath = "Assets/Images/Numbers/Number" + std::to_string(m_HighScoreNumber[i]) + ".png";
 		m_HighScoreText[i] = new Number(assetPath.c_str(), m_Renderer, 49.f, 49.f, (49 * i) + offsetX, offsetY);
 	}
 }
